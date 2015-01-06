@@ -1,0 +1,18 @@
+root
+	caja
+		top = 100
+		left, width = 100, 150 @ 100
+		left, width = 10, 400 @ 180
+		height = 100 + 100 # NEW PARSER CAPABILITIES! =)
+		bgColor: red
+	_
+		top, width = 100
+		height = this.width # NEW PARSER CAPABILITIES! =)
+		left = prev.right
+		bgColor: blue
+	_
+		top = caja.bottom + 10
+		left = caja.left
+		height = 10
+		caja.width + prev.width = width # NEW PARSER CAPABILITIES! =)
+		bgColor: green

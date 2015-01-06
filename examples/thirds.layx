@@ -1,0 +1,41 @@
+# example 13
+root
+	bgColor: FF0000
+	#bgColor: 000000
+	width = 3 * a1.width
+	a1
+		"Rule of thirds"
+		link: http://www.google.com
+		fontStyle: 'Helvetica'
+		fontSize: 40px
+		height = .33333333333 * root.height
+		#width = .33333333333 * root.width
+		centerX = root.centerX
+		centerY = root.centerY
+		bgColor: 000000
+	# 
+	# fontSize: 13px
+	# a4#::boton("chau")
+	# 	content: "jojo"
+	# 	left = 100
+	# 	top = 100
+	# 
+	# a5#::boton("hola")
+	# 	left = 0
+	# 	top = 0
+	# textColor: AA0000
+
+
+
+
+
+# 
+# :boton(titulo)
+# 	height = 200
+# 	width = 100
+# 	content: titulo
+# 
+# :boton(titulo)
+# 	height = 200
+# 	width = 100
+# 	content: titulo

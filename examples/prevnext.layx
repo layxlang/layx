@@ -1,0 +1,13 @@
+root
+	_
+		"1"
+		bgColor: red
+		left, top, width, height = 100 @ 500 # TODO: Decrease chug priority to, for ex., 5
+	_
+		"2"
+		bgColor: green
+		left, top, width, height = prev.left, next.top, prev.width, next.top
+	_
+		"3"
+		bgColor: blue
+		left, top, width, height = 210

@@ -1,0 +1,33 @@
+html, body {
+    height: 100%;
+}
+body {
+	background-color: red; /* REMOVE FOR PRODUCTION */
+	margin: 0px;
+	padding: 0px;
+}
+#root {
+	position: relative;
+	-resize: both !important;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: white;
+
+	/*-moz-user-select: none; 
+	-khtml-user-select: none; 
+	-webkit-user-select: none; 
+	-o-user-select: none;*/
+}
+.view {
+	position: absolute;
+	text-decoration: none;
+	box-sizing: border-box;
+	color: inherit;
+	white-space: pre-wrap;
+}
+.view .id {
+	font-size: 13px;
+	color: #000;
+	margin: 5px;
+	position: absolute;
+}

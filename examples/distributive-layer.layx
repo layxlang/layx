@@ -1,0 +1,59 @@
+root
+	#================================================
+	# Cuadrados pseudo-concentricos
+	#===============================================#
+	_
+		rect = 150
+		bgColor: orange
+	_
+		rect = prev.(position, width - 10, height - 10)
+		bgColor: purple
+	_
+		rect = prev.(left + 10, top + 10, width - 20), prev.height - 20
+		bgColor: red
+	_
+		rect = prev.(left + 10, top + 10), prev.(width - 20, height - 20)
+		bgColor: blue
+	_
+		# ESTO: center, size = prev.center, 20 ; NO funciona por tener 4 params = 3 params
+		center = prev.center
+		size = 50
+		bgColor: pink
+	
+	#================================================
+	# Esquina
+	#===============================================#
+	_
+		top, left = super.(top + 10, left + 10)
+		width, height = 100
+		bgColor: green
+		a
+			bgColor: pink
+			left, top, width, height = super.(left + 20, top + 20, 10, 10)
+			_
+				rect = a.(super.left + 10, super.top + 10), a.super.(width, height)
+				bgColor: black
+			este
+				left, top = a.(super.left + 10, super.top + 10)
+				# 'this' is still this layer (este)
+				# a sum of this line should be: a.width + este.prev.width
+				width, height = a.(width + this.prev.width / 3, height + this.prev.height / 3)
+				bgColor: orange
+				_
+					position = super.(right, bottom)
+					size = 30
+					bgColor: gray
+
+	#================================================
+	# Derecha
+	#===============================================#
+	_
+		rect = root.children[0].right + 10, 10, 200, 150
+		bgColor: green
+	_
+		rect = prev.(right + 10, top), 50, 100
+		bgColor: blue
+	_
+		# Check this awesomeness! rect = a.position, b.size
+		rect = prev(2).position, prev.size
+		bgColor: black

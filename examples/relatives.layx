@@ -1,0 +1,83 @@
+root
+	_
+		"A"
+		bgColor: red
+		left, top = 50
+		width, height = 200
+		_
+			"B"
+			bgColor: green
+			right, bottom = super.right - 10, super.bottom - 10
+			left, top = super.left + 10, super.top + 10
+			_
+				"C"
+				bgColor: blue
+				# NEW: super.super
+				right, bottom = super.super.right - 20, super.super.bottom - 20
+				left, top = super.super.left + 20, super.super.top + 20
+				-
+					"D"
+					bgColor: orange
+					# NEW: super(3)
+					right, bottom = super(3).right - 30, super(3).bottom - 30
+					left, top = super(3).left + 30, super(3).top + 30
+		_
+			bgColor: black
+			# NEW: children[i]
+			centerX, top, bottom = super.centerX, prev.children[0].children[0].bottom, super.bottom
+			width = height
+	_
+		"1"
+		bgColor: red
+		left, top = prev.right + 10, prev.top
+		width, height = 70
+	_
+		"2"
+		bgColor: green
+		left, top = 10
+		width, height = 40
+	_
+		"3"
+		bgColor: blue
+		# NEW: prev.prev... & prev(3)
+		left, top = prev.prev.right + 10, prev(2).top
+		height = prev(3).height
+		width = next.width
+	
+	_
+		bgColor: purple
+		# NEW: Combination relative(...).children[...]
+		centerX = prev(4).children[1].centerX
+		top = prev(4).children[1].bottom
+		width, height = prev(4).children[1].width
+
+	id
+		"ID"
+		bgColor: red
+		top, left = prev(2).top, prev(2).right + 10
+		width, height = 120
+		_
+			bgColor: blue
+			left, top = super.left, super.top
+			width, height = 30
+		_
+			bgColor: blue
+			right, bottom = super.right, super.bottom
+			width, height = 40
+			
+	_
+		# NEW: id.children[...]
+		bottom, left = id.children[0].bottom, id.children[1].left
+		height = id.children[1].prev.height
+		width = 200
+		bgColor: orange
+		_
+			# NEW: layer.relative(...) / mix
+			"ID related"
+			bottom, right = this.super(1).bottom, this.super(1).right
+			bgColor: green
+
+	_
+		"ID related 2"
+		top, left = id.super(1).children[6].bottom, id.super(1).children[6].right
+		bgColor: yellow

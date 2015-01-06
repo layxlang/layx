@@ -1,0 +1,62 @@
+
+#::boton(nombre, color, padding = 10)
+#	bgColor: color
+#	_#text
+#		content: nombre
+#		centerX = super.centerX
+#		centerY = super.centerY
+#		top = super.top + padding
+#		left = super.left + padding
+
+::colorido(elColor)
+	bgColor: elColor
+
+::boton(elColor, nombre, padding = 10)
+	top = 10
+	left = prev.right + 10
+	_#text
+		bgColor: elColor
+		content: nombre
+		centerX = super.centerX
+		centerY = super.centerY
+		top = super.top + padding
+		left = super.left + padding
+
+root
+	bgColor: black
+	_
+		_ # .prev of first _::boton
+			left = 10
+			width = 0
+		miBoton::boton(blue, "holas")
+			bgColor: green
+		_::boton(red, "chaus", 20)::colorido(orange)
+		_::boton(red, "FDSFSGDGFSD")
+	container
+		width = 0.33 * root.width
+		height = 150 #0.2 * root.height
+		centerX = super.centerX
+		centerY = super.centerY
+		bgColor: 222
+		a
+			"TE"
+			bgColor: red
+			width = super.width * 0.333 - 15
+			height = super.height - 20
+			left = super.left + 10
+			top = super.top + 10
+		b
+			"LE"
+			bgColor: blue
+			textColor: green
+			width = super.width * 0.333 - 15
+			height = super.height - 20
+			centerX = super.centerX
+			top = super.top + 10
+		c
+			"FE"
+			bgColor: green
+			width = super.width * 0.333 - 15
+			height = super.height - 20
+			right = super.right - 10
+			top = super.top + 10

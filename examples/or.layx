@@ -1,0 +1,16 @@
+root
+	_
+		rect = 10, 10, 300, 300
+		bgColor: green
+		_::nice("A")
+		_::nice("B")
+		_::nice("C")
+
+::nice(text)
+	right = next.left - 10 | super.right - 30
+	top = (prev.bottom | super.top) + 30
+	size = children[10].width | prev(10000).height | 50, 30
+	bgColor: yellow
+	_
+		center = super.center
+		text

@@ -1,0 +1,11 @@
+# Constraint chain: Cadena de constraints con operadores: a <= b <= c, etc...
+root
+	a
+		bgColor: red
+		100 <= left, top <= right, bottom <= window.right - 100, window.bottom - 100
+		width, height = 9999999
+	b
+		bgColor: blue
+		left, top = a.left+5, a.top+5
+		100 <= width, height <= a.width * 0.5, a.height * 0.5
+		# Probar achicar la ventana y ver qué pasa

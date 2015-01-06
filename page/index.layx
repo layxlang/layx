@@ -1,0 +1,1263 @@
+root
+	icon: "resources/layx-favicon.png"
+	top = 0 @ 1000
+	bgColor: DDD
+	bottom = content.bottom + footer.height
+	fontStyle: sans-serif
+	content
+		centerX = root.centerX
+		400 <= width <= 1000
+		width = window.width
+		#height >= 1000
+		#150-50 <= top - window.top
+		#bottom = 1000
+		#window.bottom - bottom >= 0
+		
+	header
+		left, top, width, bottom = 0, window.top, window.width, menubar.top
+		bgColor: FFF
+		zindex: 3
+		logo
+			position = content.left, window.top# @ 1000
+			size = content.width, 50
+			zindex: 1
+			#logoImg
+			#	img: resources/layx-icon-big.png
+			#	size = 50
+			#	left, top = super.left, super.top
+			#	#right, bottom = content.right, copyright.top - 10
+			logoTitle
+				"Layx"
+				!click: layx.loadURL('');  ga('send', 'pageview', {page:"",title:layx.URLs[layx.URLs['']].title});
+				position = super.left, super.top + 10
+				fontStyle, textColor: Verdana, 666
+			logoSlogan
+				"Easiest Layout Language"
+				left, baseline = prev.right + 10, prev.baseline
+				fontStyle, fontSize, textColor: Verdana, 13px, 666
+
+	menubar
+		top >= window.top# + 50
+		#top <= 100#logo.bottom
+		top = 100 + window.top * 0.5 # + logo.height..
+		left, height = 0, 50 @ 998
+		width = root.width
+		bgColor: 333
+		zindex: 5
+		overflow: hidden
+		#css(box-shadow): 0px 5px 5px rgba(0,0,0,0.3)
+		
+		layxRight
+			"Layx"
+			right, top = content.right - 20, logoTitle.top
+			fontStyle: Verdana # logoTitle.fontSize
+			textColor: EEE
+
+		slogRight
+			"Easiest Layout Language"
+			fontStyle, fontSize, textColor: Verdana, 13px, BBB
+			right, baseline = prev.left - 10, prev.baseline
+		_
+			_::menuButton("Download", "?download")
+			_::menuButton("Documentation", "?docs")
+			_::menuButton("Community", "?community")
+			_::menuButton("News", "?news")
+			_::menuButton("About", "?about")
+			_::menuButton("Donate", "?donate")
+	info
+		top = logo.height + 100 # logo.bottom + menubar.height
+		centerX = content.centerX
+		width, bottom = content.width, content.bottom - 10
+	footer
+		left, right = root.left, root.right
+		top <= content.bottom
+		#top = root.bottom - height + (root.bottom - window.bottom) * 0.7
+		height = 260 @ 1000
+		#css(box-shadow): 0px -5px 5px rgba(0,0,0,0.3)
+		zindex: 2
+
+		#bottom <= window.bottom# + 50
+		#top <= 100#logo.bottom
+		#bottom = root.bottom - ((root.bottom - window.bottom) * 0.5 + 100) # + logo.height..
+		#left, height = 0, 50 @ 1000
+		#width = root.width
+
+		#left, right, bottom, height = content.left, content.right, 1000, 40
+		#root.bottom = footer.bottom
+		bgColor: 333
+		_
+			center, height, width = super.center, children[1].bottom - children[0].top, super.width
+			bigLogo
+				img: resources/layx-icon-medium1.png
+				size = 100
+				centerX, top = super.(centerX, top - 20)
+			copyright
+				"Copyright &copy; 2014 Layx Language"
+				fontSize: 15px
+				textColor: 666
+				centerX, top = prev.(centerX, bottom + 15)
+			_
+				fontSize: 18px
+				textColor: 666
+				centerX, top = prev.(centerX, bottom + 30)
+				"ask every<span style='display:none;'>person</span>thi<span>n</span>g@la<span style='display:none;'>nto</span>yx.org"
+
+::menuButton(buttonText, urlID)
+	left, top, height = prev.right | content.left, super(2).top, super(2).height
+	!click: layx.loadURL(urlID); ga('send', 'pageview', {page:urlID,title:layx.URLs[urlID?urlID:layx.URLs['']].title});
+	_
+		buttonText
+		center = super.center
+		width = super.width - 40
+		textColor: lightgray
+
+::comingSoon(section)
+	rect = info.rect
+	_
+		left, top, right, bottom = super.left + 10, super.top + 10, super.right - 10, super.bottom
+		_
+			"section coming soon"
+			centerX = super.centerX
+			top = super.top + 40
+		_
+			"Ask every<span style='display:none;'>person</span>thi<span>n</span>g@la<span style='display:none;'>nto</span>yx.org"
+			centerX, top = prev.centerX, prev.bottom + 40
+
+infoLoader
+	rect = info.rect
+	content.bottom >= 350
+	textColor: 555
+	_
+		"Loading..."
+		center = super.center
+
+down
+	rect = info.rect
+	textColor: 333
+	content.bottom >= downGrayBar.bottom + 50
+	content.bottom = downGrayBar.bottom + (window.height - footer.height - menubar.height) - downGrayBar.height - 80
+	_
+		center = super.centerX, (menubar.bottom + next.top) / 2
+		size = super.width, children[4].bottom - children[0].top
+		#bgColor: red
+		_
+			top = super.top
+			centerX = super.centerX
+			"The easiest layout language, ever. Everybody likes layx."
+		_
+			center = info.centerX, (prev.bottom + next.top) / 2
+			fontSize: 15px
+			textColor: 555
+			"Discover the power behind the Cassowary algorithm..."
+			
+		downloadButton
+			link: resources/layx-alpha-0.1.zip
+			size = children[0].width + 50, children[0].height + 30
+			# Average! :)
+			#(left + next.right) / 2 = info.centerX
+			centerX = info.centerX
+			centerY = (menubar.bottom + downGrayBar.top) / 2
+			bgColor: 900
+			_
+				"Download Layx"
+				center = super.(centerX, centerY - 3)
+				textColor: rgba(255,255,255,0.9)
+			_
+				"alpha-0.1"
+				center = prev.(centerX, (baseline + super.bottom) / 2 - 1)
+				textColor: rgba(255,255,255,0.6)
+				fontSize: 12px
+				
+		#=
+		downloadButtonExamples
+			_
+			link: resources/layx-alpha-0.1-examples.zip
+			size = children[0].width + 50, children[0].height + 30
+			left = prev.right + 20
+			top = prev.top
+			bgColor: 900
+			_
+				"Download Layx + examples"
+				center = super.(centerX, centerY - 3)
+				textColor: rgba(255,255,255,0.9)
+			_
+				"alpha-0.1"
+				center = prev.(centerX, (baseline + super.bottom) / 2 - 1)
+				textColor: rgba(255,255,255,0.6)
+				fontSize: 12px
+		=#
+		_
+			center = info.centerX, (prev.bottom + next.top) / 2
+			fontSize: 15px
+			textColor: 555
+			"...the one Apple is using for their user interfaces"
+		_
+			top = prev(2).bottom + 45
+			centerX = info.centerX
+			"And FORGET HTML &amp; CSS"
+
+	downGrayBar
+		#top = 500#root.bottom + 50
+		#window.height + window.top = bottom <= window.height + 50
+		bottom = window.height
+		#top >= prev.bottom # Pensar que pasa si al abrir es demasiado chico el espacio inicial
+		top >= 370
+		left, width = root.(left, width)
+		height = 260 @ 500
+		bgColor: 333
+		#css(box-shadow): 0px 0px 10px rgba(0,0,0,0.7)
+		css(box-shadow): 0px 5px 5px rgba(0,0,0,0.1)
+		zindex: 2
+		# GUARDAR EN UN EJEMPLO ESTO DE LAS n-COLUMNAS!! ES GENIAL! =)
+		_
+			#css(border): 1px solid rgb(100,100,100)
+			bgColor: 222
+			position = content.left, super.top + 20
+			height = super.height - 40
+			_
+				"EASY | SMALL CODE"
+				textColor: white
+				fontStyle: sans-serif
+				fontSize: 15px
+				bottom = baseline
+				position = super.(left + 10, top + 10)
+				zindex: 1 # TODO: First run classes codes!!
+				_ # BUG: si esto no va como hijo cambiando super(2) por super; y super por prev no funciona!!
+					left,top,right,bottom = super(2).left + 0, super.bottom + 10, super(2).(right - 0, bottom - 0)
+					bgColor: white
+					_
+						rect = super.rect
+						css(padding): 10px
+						fontStyle: courier new
+						fontSize: 10pt
+						textColor: black
+						"root # Rule of thirds"
+						"  _"
+						"    center = super.center"
+						"    size = super.(width/3, height/3)"
+						"    bgColor: 900"
+						"  _"
+						"    center = prev.position"
+						"    size = 30 # square"
+						"    bgColor: rgba(0,0,0,0.5)"
+				
+		_
+			#css(border): 1px solid rgb(100,100,100)
+			bgColor: 222
+			position = prev.right + 15, prev.top
+			size = prev.size
+			_
+				"POWERFUL | BIG THINGS"
+				textColor: white
+				fontStyle: sans-serif
+				fontSize: 15px
+				bottom = baseline
+				position = super.(left + 10, top + 10)
+				zindex: 1 # TODO: First run classes codes!!
+				_
+					left,top,right,bottom = super(2).left + 0, super.bottom + 10, super(2).(right - 0, bottom - 0)
+					bgColor: white
+					_
+						center = super.center
+						size = super.(width/3, height/3)
+						bgColor: 900
+					_
+						center, size = prev.position, 30, 30
+						#size = 20 # square
+						bgColor: rgba(0,0,0,0.5)
+		#_
+		#	css(border): 1px solid rgb(128,128,128)
+		#	bgColor: black
+		#	position = prev.right + (prev.left - prev(2).right), prev.top
+		#	size = prev.size
+		#	_
+		#		"MULTIPLATFORM"
+		#		textColor: white
+		#		fontStyle: sans-serif
+		#		fontSize: 15px
+		#		position = super.(left + 10, top + 10)
+		#		zindex: 1 # TODO: First run classes codes!!
+		_
+			#css(border): 1px solid rgb(100,100,100)
+			bgColor: 222
+			position = prev.right + (prev.left - prev(2).right), prev.top
+			size = prev.size
+			right = content.right
+			_
+				"THE MAXIMUM POWER"
+				textColor: white
+				fontStyle: sans-serif
+				fontSize: 15px
+				bottom = baseline
+				position = super.(left + 10, top + 10)
+				zindex: 1 # TODO: First run classes codes!!
+				_ # BUG: si esto no va como hijo cambiando super(2) por super; y super por prev no funciona!!
+					left,top,right,bottom = super(2).left + 0, super.bottom + 10, super(2).(right - 0, bottom - 0)
+					_
+						rect = super.(left, top, width, height / 2)
+						bgColor: 555
+						_
+							left, centerY, width, height = super.(left, centerY, width), children[1].bottom - children[0].top
+							_
+								"OPEN SOURCE"
+								centerX, top = super.centerX, super.top
+								fontSize: 18px
+								textColor: rgba(255,255,255,0.8)
+							_
+								"GitHub Repository"
+								link: http://github.com/layxlang/layx/
+								centerX, top = super.centerX, prev.bottom + 5
+								fontSize: 15px
+								textColor: AAA
+					_
+						rect = super.(left, top + height / 2, width, height / 2)
+						bgColor: 444
+						_
+							left, centerY, width, height = super.(left, centerY, width), children[1].bottom - children[0].top
+							_
+								"MULTIPLATFORM (Soon)"
+								centerX, top = super.centerX, super.top
+								fontSize: 18px
+								textColor: rgba(255,255,255,0.8)
+							_
+								"(iOS, Android, Web, etc.)"
+								centerX, top = super.centerX, prev.bottom + 5
+								fontSize: 15px
+								textColor: AAA
+		_
+			left, top = prev(3).children[0].children[0].(right, top)
+			right, bottom = prev(2).children[0].children[0].(left, bottom)
+			bgColor: rgba(255,255,255,0.3)
+		#_
+		#	left, top = prev(3).children[0].children[0].(right, top)
+		#	right, bottom = prev(2).children[0].children[0].(left, bottom)
+		#	bgColor: rgba(255,255,255,0.3)
+	_
+		bgColor: 222
+		css(box-shadow): 0px 0px 5px rgba(0,0,0,0.1) inset
+		zindex: 1
+		left, top, right, bottom = root.left, prev.bottom, root.right, footer.top
+		_
+			center = super.(centerX, centerY + 2)
+			"This page was entirely created with Layx"
+			textColor: 555
+				
+
+doc
+	rect = info.rect
+	fontStyle: sans-serif
+	fontSize: 22px
+	_
+		left, top, right, bottom = super.left + 20, super.top + 10, super.right - 20, super.bottom
+		docMenu
+			# super.position # considerar como queda solo
+			position = super.(left, top - 10)
+			#top >= menubar.bottom + 50 @ 900
+			fontStyle: sans-serif
+			_
+				position = content.left, super.top
+				fontStyle: Helvetica, Arial, sans-serif
+				fontSize: 16px
+				_::docItem('?docs', "Introduction")
+				_::docItem('?docs.layers', "Layers")
+				_::docSubItem('?docs.layers', "Introduction")
+				_::docSubItem('?docs.attributes', "Attributes")
+				_::docSubItem('?docs.hierarchy', "Hierarchy")
+				_::docSubItem('?docs.properties', "Properties")
+				_::docSubItem('?docs.events', "Events")
+				_::docItem('?docs.constraints', "Constraints")
+				_::docItem('?docs.classes', "Classes")
+				_::docItem("?docs.javascript", "JavaScript code")
+				_::docItem("?docs.css", "CSS Compatibility")
+				_::docItem("?docs.next", "Next releases")
+				_
+					content.bottom >= prev.bottom + 100
+
+		docsContentContainer
+			bgColor: EEE
+			position = super.(left + 180, top)
+			right = super.right + 30
+			bottom = super.bottom
+			fontSize: 17px
+			fontStyle: Helvetica,Arial, sans-serif
+			textColor: 222
+			css(text-align): justify
+
+				
+
+::docItem(docURL, text)
+	position = super.left + 20, prev.bottom + 10 | super.top + 50
+	height = 30
+	right = docsContentContainer.left
+	!click: layx.loadURL(docURL); ga('send', 'pageview', {page: docURL,title:layx.URLs[docURL? docURL:layx.URLs['']].title});
+	text
+::docSubItem(docURL, text)
+	fontSize: 14px
+	position = super.left + 45, prev.bottom | super.top + 50
+	height = 30
+	right = docsContentContainer.left
+	!click: layx.loadURL(docURL); ga('send', 'pageview', {page: docURL,title:layx.URLs[docURL? docURL:layx.URLs['']].title});
+	text
+
+com
+	rect = info.rect
+	content.bottom >= 350
+	_
+		centerX, width = super.centerX, width
+		centerY, height = super.centerY, (children[1].bottom - children[0].top) * 1.25
+		_
+			"Community coming soon"
+			centerX = super.centerX
+			top = super.top
+		_
+			"Ask every<span style='display:none;'>person</span>thi<span>n</span>g@la<span style='display:none;'>nto</span>yx.org"
+			centerX, top = prev.centerX, prev.bottom + 40
+
+
+news
+	rect = info.rect
+	content.bottom >= 350
+	_
+		centerX, width = super.centerX, width
+		centerY, height = super.centerY, (children[1].bottom - children[0].top) * 1.25
+		_
+			"News coming soon"
+			centerX, top = super.centerX, super.top
+		#=
+		_
+			"News"
+			centerX, top = super.centerX, super.top
+		_
+			"09/08/2014: Layx alpha-0.1 released! =)"
+			centerX, top = prev.centerX, prev.bottom + 40
+		=#
+		_
+			"Ask every<span style='display:none;'>person</span>thi<span>n</span>g@la<span style='display:none;'>nto</span>yx.org"
+			centerX, top = prev.centerX, prev.bottom + 40
+		
+
+
+
+about
+	rect = info.rect
+	content.bottom = window.height
+	top - window.top >= 200
+	menubar.top = window.top + 100 @ 1000
+	textColor: DDD
+	_
+		position, right, bottom = window.left, menubar.bottom, window.right, footer.top
+		bgColor: 333
+		_
+			rect = super.left + 20, super.top + 20, super.width - 40, super.height - 40
+			bgColor: rgba(255, 255, 255, 0.2)
+	_
+		left, top, right, bottom = super.left + 10, super.top + 10, super.right - 10, super.bottom
+		_
+			(children[0].top + children[1].bottom) / 2 = (next.top + next(3).bottom) / 2
+			next.centerY <= super.prev.children[0].centerY @ 700
+			_
+				"About Layx"
+				centerX = super(2).centerX
+			_
+				"Created by"
+				centerX = prev.centerX
+				top = prev.bottom + 30
+		_::aboutImage(resources/matias.jpg)
+			position = super.left + 10 + window.top * 0.3, super.top + 10# + window.top * 0.05
+		_
+			"Matias Altalef"
+			left, bottom = prev.right + 10 + window.top * 0.05, prev.bottom - 20
+		_::aboutImage(resources/axel.jpg)
+			right, top = super.right - 10 - window.top * 0.3, super.top + 10# - window.top * 0.05
+		_
+			"Axel Brzostowski"
+			right, top = prev.left - 10 - window.top * 0.05, prev.top + 20
+			
+		
+
+::aboutImage(url)
+		size = 200
+		bgColor: white
+		_
+			img: url
+			center = super.center
+			size = super.(width - 20, height - 20)
+
+donate
+	rect = info.rect
+	content.bottom >= 350
+	_
+		centerX, width = super.centerX, width
+		centerY, height = super.centerY, (children[1].bottom - children[0].top) * 1.25
+		_
+			"Donation coming soon"
+			centerX = super.centerX
+			top = super.top
+		_
+			"Ask every<span style='display:none;'>person</span>thi<span>n</span>g@la<span style='display:none;'>nto</span>yx.org"
+			centerX, top = prev.centerX, prev.bottom + 40
+
+
+
+
+###### DOCUMENTATION SECTIONS ######
+
+::docSection(contentBottom = 0) # There is another constraint to let at least the doc menu be fully shown
+	rect = docsContentContainer.rect
+	content.bottom >= contentBottom + 100
+	children[0].(top, left, right) = top, left, right
+
+::docTitle(title)
+	fontSize: 24px
+	fontStyle: sans-serif
+	position = super.left + 30, super.top + 35
+	content: title
+	bottom = baseline #TODO: Sin esto o height no funciona!
+
+::docTitle2(title)
+	fontSize: 19px
+	css(font-weight): bold
+	fontStyle: sans-serif
+	position = super.left + 30, prev.bottom + 40
+	right = super.right - 40
+	content: title
+	bottom = baseline + 15 #TODO: Sin esto o height no funciona!
+	css(border-bottom): 1px dotted rgba(0,0,0,0.5)
+
+::docTitle3(title)
+	fontSize: 16px
+	css(font-weight): bold
+	fontStyle: sans-serif
+	position = super.left + 30, prev.bottom + 30
+	right = super.right - 40
+	content: title
+	bottom = baseline + 10 #TODO: Sin esto o height no funciona!
+	css(border-bottom): 1px dotted rgba(0,0,0,0.5)
+
+
+::docSubSectionText(lines = 1) # TODO: borrar height cuando este el cambio de la height de los layers con texto
+	height = lines * 24 #contentHeight
+	css(line-height): 24px
+	position = super.left + 30, prev.bottom + 20
+	right = super.right - 40
+
+::docSubSectionCode(lines = 1) # TODO: borrar height cuando este el cambio de la height de los layers con texto
+	fontStyle: courier new
+	fontSize: 11pt
+	bgColor: FFF
+	css(border): 1px solid 333
+	css(line-height): 20px
+	height = lines * 20 + 40 #contentHeight + 30
+	top = prev.bottom + 20
+	left = super.left + 30
+	right = super.right - 30
+	children[0].left = left + 20
+	children[0].top = top + 20
+	children[0].center = center
+
+::docCanvas
+	css(border): 1px solid rgba(0,0,0,0.6)
+	size = 300, 200
+	bgColor: white
+
+::docCanvasVert
+	css(border): 1px solid rgba(0,0,0,0.6)
+	size = 200/3*2, 200
+	bgColor: white
+
+docLoader
+	rect = docsContentContainer.rect
+	textColor: 555
+	_
+		"Loading..."
+		center = super.center
+
+
+
+docIntroduction::docSection(_docIntroductionEnd.top)
+	_
+		_::docTitle("Introduction")
+		_::docTitle2("The root of your design")
+		_::docSubSectionText
+			#"Welcome to the root of your design: your canvas. Here is where you will materialize all your designs with this simple but powerful language. It looks like this:"
+			"Welcome to the canvas in which all your ideas will be materialized:"
+		_::docCanvas
+			position = prev.(left + 10, bottom + 30)
+		_::docSubSectionText
+			"Yes, it's just a blank rectangle. It's called root."
+		_::docTitle2("Coordinate system")
+		_::docSubSectionText(3)
+			"Layx's coordinate system determines precisely and mathematically the location of every layer in the canvas. Every coordinate exists inside the same system, the origin being always (0, 0), the top-left point of the canvas, incrementing towards the right and the bottom."
+			#SPANISH: "El sistema de coordenadas de Layx sirve para facilitar de forma precisa y matemática la ubicación de los layers en el lienzo. Todas las coordenadas, incluso la de los layers se miden bajo el mismo sistema de coordenadas, siempre siendo (0, 0), el origen, el punto superior izquierdo del lienzo, y creciendo hacia la derecha y hacia abajo."
+		_::docCanvas
+			#size = 300, 200
+			centerX, top = prev.(centerX, bottom + 30)
+			fontSize: 15px
+			#fontStyle: courier new
+			#bgColor: white
+			css(border-top): 1px solid rgba(0,0,0,0.6)
+			css(border-left): 1px solid rgba(0,0,0,0.6)
+			_
+				center, size = super.position, 11, 11
+				css(border-radius): 50%
+				bgColor: rgba(255,0,0,0.9)
+			_
+				"(0, 0)"
+				position = super.(left + 5, top + 5)
+			_
+				"(+, 0)"
+				right, top = super.(right - 5, top + 5)
+			_
+				"(0, +)"
+				left, bottom = super.(left + 5, bottom - 5)
+			_
+				"(+, +)"
+				right, bottom = super.(right - 5, bottom - 5)
+			_
+				"root"
+				textColor: AAA
+				center = super.center
+		_::docTitle2("Window")
+		_::docSubSectionText(4)
+			"Besides the root, there is a special layer called Window. Its size is always equal to the browser window's size, and it's position follows the scroll of the whole page. By referring to this layer, it becomes trivial to, for example, make something that sticks to a border of the window as the user scrolls."
+		
+		#= TODO: This :P
+		_::docTitle2("Next topic")
+		_::docSubSectionText(1)
+			"Go to the next topic"
+			!click: layx.loadURL('?docs.layers'); ; ga('send', 'pageview', {page: '?docs.layers', title:layx.URLs['?docs.layers'].title});
+			textColor: green
+		=#
+		_docIntroductionEnd
+			top = prev.bottom
+
+
+docLayers::docSection(_docLayersEnd.top)
+	_
+		_::docTitle("Layers")
+		_::docTitle2("Introduction")
+		_::docSubSectionText(2)
+			"The way to design with Layx is through layers. They are rectangles that are placed on the canvas. Say hello to the red layer:"
+		_::docCanvas
+			centerX, top = prev.(centerX, bottom + 30)
+			_
+				rect = super.(left + width / 4, top + height / 4, width / 4, height / 4)
+				bgColor: red
+		_::docTitle2("Naming")
+		_::docSubSectionText(2)
+			"Layers can have unique IDs to be referred to externally, or be anonymous. To create a new layer in Layx just type its ID, or underscore if it hasn't any."
+			#"" # TODO: This has to create an empty line but it doesn't
+			#"To create a Layer in Layx just type its ID or underscore '_' if it hasn't any."
+		_::docSubSectionCode(2)
+			_
+				"beautifulLayer # This creates a layer called beautifulLayer"
+				"_              # This creates an anonymous layer"
+		
+		_docLayersEnd
+			top = prev.bottom
+
+docAttributes::docSection(_docAttributesEnd.top)
+	_
+		_::docTitle("Layers")
+		_::docTitle2("Attributes")
+		_::docSubSectionText
+			"Attributes are numerical variables that determine how layers are… well, laid out. They are:"
+			
+		_ # imagen
+			left, top = prev.(left + 50, bottom + 20)
+			size = 400, 250
+			_
+				center = super.center
+				size = super.(width / 2, height / 2)
+				bgColor: red
+				css(border): 2px solid rgb(128,0,0)
+				fontSize: 13px
+				_#left
+					left, centerY, size = super.(left, centerY), 5, super(2).height
+					bgColor: rgba(0,0,0,0.3)
+					_
+						"left"
+						position = super.right + 3, super.top
+						
+				_#right
+					left, centerY, size = super.(right, centerY), super.children[0].width, super(2).height
+					bgColor: rgba(0,0,0,0.3)
+					_
+						"right"
+						position = super.right + 3, super.top
+				_#top
+					top, centerX, size = super.(top, centerX), super(2).width, super.children[0].width
+					bgColor: rgba(0,0,0,0.3)
+					_
+						"top"
+						position = super.left, super.bottom + 3
+				_#bottom
+					top, centerX, size = super.(bottom, centerX), super(2).width, super.children[0].width
+					bgColor: rgba(0,0,0,0.3)
+					_
+						"bottom"
+						position = super.left, super.bottom + 3
+				_#width
+					left, bottom, size = super.(left, top - 10), super.width, super.children[0].width
+					bgColor: rgba(0,0,255,0.5)
+					_
+						"width"
+						centerX, bottom = super.left + super.width / 4, super.top - 2
+						textColor: rgba(0,0,255,0.9)
+				_#height
+					right, top, size = super.(left - 10, top), super.children[0].width, super.height
+					bgColor: rgba(0,0,255,0.5)
+					_
+						"height"
+						right, centerY = super.left - 2, super.top + super.height / 4
+						textColor: rgba(0,0,255,0.9)
+				_#centerX
+					left, centerY, size = super.center, super.children[0].width, super(2).height
+					bgColor: rgba(0,0,0,0.3)
+					_
+						"centerX"
+						left, bottom = super.right + 3, super.bottom
+				_#centerY
+					centerX, top, size = super.center, super(2).width, super.children[0].width
+					bgColor: rgba(0,0,0,0.3)
+					_
+						"centerY"
+						right, top = super.right, super.bottom + 3
+				
+			
+		_::docSubSectionText(9)
+			"left: The leftmost horizontal coordinate (in pixels, it would be inside the layer)."
+			"top: The topmost vertical coordinate (in pixels, it would be inside the layer)."
+			"width: The width of the layer."
+			"height: The height of the layer."
+			"right: The first horizontal coordinate to the right of the layer and outside of it (in terms of pixels)."
+			"bottom: The first vertical coordinate below the layer and outside of it (in terms of pixels)."
+			"centerX: The horizontal coordinate which is the average between left and right."
+			"centerY: The vertical coordinate which is the average between top and bottom."
+			"baseline: For layers with text, the line upon which most letters "sit". Otherwise, it's the bottom."
+		_::docSubSectionText(3)
+			"For a layer to have an unambiguous rectangle, two vertical and two horizontal attributes must be defined (e.g. left and width for horizontal, but not left and right AND centerX). The other attributes can be deduced from them."
+		_::docSubSectionText
+			"Because of the coordinate system, the following relations of attributes are always true:"
+		_::docSubSectionCode(4)
+			_
+				"right = left + width"
+				"bottom = top + height"
+				"centerX = (left + right) / 2 = left + width / 2"
+				"centerY = (top + bottom) / 2 = top + height / 2"
+		
+		_docAttributesEnd
+			top = prev.bottom
+
+
+
+
+docHierarchy::docSection(_docHierarchyEnd.top)
+	_
+		_::docTitle("Layers")
+		_::docTitle2("Hierarchy")
+		_::docSubSectionText(2)
+			"When designing user interfaces (i.e. web pages), the content is laid out in a hierarchy of layers, just like in HTML:"
+		_ # images
+			position = prev.left, prev.bottom + 20
+			_
+				img: resources/docs-basic-nice.png
+				size = 300, 255
+				position = super.position#super.left + 20, prev.children[1].bottom + 20 # TODO: prev del codigo
+			_
+				img: resources/docs-basic-outlines.png
+				size = 300, 255
+				position = prev.right + 20, prev.top
+				right = super.right
+			_
+				img: resources/docs-basic-isometric.png
+				size = 195, 198 #390, 397
+				top = prev.bottom - 80
+				centerX = super.centerX
+				bottom = super.bottom
+		_::docSubSectionText
+			"Hierarchy is expressed by indentation:"
+		_::docSubSectionCode(5)
+			_
+				"root"
+				"    sideBar"
+				"    mainWrapper"
+				"        title" # title es un nombre valido?
+				"        content" # title es un nombre valido?
+
+		_::docTitle2("Relatives")
+		_::docSubSectionText
+			"In your constraints, you can refer to other layers by their name or by the hierarchical relationship."
+		_::docSubSectionCode(3)
+			_
+				"someLayer"
+				"    left = prev.right"
+				"    width = super.width"
+		_::docSubSectionText
+			"The relatives you can use are:"
+		_::docSubSectionCode(4)
+			_
+				"children[n] # the n-th child"
+				"super(n) # the n-th ancestor"
+				"prev(n) # the n-th previous sibling"
+				"next(n) # the n-th next sibling"
+		_::docSubSectionText
+			"If there are no parentheses for super, prev or next, n is 1 by default."
+		
+		_docHierarchyEnd
+			top = prev.bottom
+
+
+::docPropText
+	position = prev.left, prev.bottom + 10
+	right = super.right - 40
+	bottom = baseline
+	fontSize: 14px
+
+::docPropTextML2
+	position = prev.left, prev.bottom + 10
+	right = super.right - 40
+	css(line-height): 24px
+	height = 48
+	fontSize: 14px
+
+
+docProperties::docSection(_docPropertiesEnd.top)
+	_
+		_::docTitle("Layers")
+		_::docTitle2("Properties")
+		_::docSubSectionText
+			#SPANISH: "Colores? Textos? (literalmente poner, “Colors? Texts?”) Una vez ubicadas las layers, las propiedades son las que determinan la apariencia y el contenido de los layers. Son las siguientes:"
+			"Properties determine the appearance of layers. They are set using indentation:"
+		_::docSubSectionCode(2)
+			_
+				"layer"
+				"    property: value"
+		_::docTitle3("content (string)")
+		_::docPropTextML2
+			"It determines the text contained in the layer. Surrounded by double quotes, the property name ('content') can be explicit or implicit."
+			#"Determines the contained text. It also be used with quotes without the property name."
+		_::docSubSectionCode(5)
+			_
+				"layer1"
+				"    content: "Hi, I'm some text! The user will see me!"" #TODO: ya sabia que esto esto funcionaba pero no se por que
+				" " #TODO: tiene que haber un espacio para que haya un linebreak
+				"layer2"
+				"    "And I'm text too""
+		_::docTitle3("bgColor (css-color with no #)")
+		_::docPropText
+			"It sets the layer's background color. Valid examples: F0F0F0, red, rgba(0, 255, 0, 0.5)."
+			#SPANISH: SPANISH: "determina el color del layer"
+		_::docTitle3("title (string)")
+		_::docPropText
+			"If in root, it sets the page title. Otherwise, the layer's tooltip."
+			#SPANISH: "determina el tooltip (?)"
+		_::docTitle3("textColor (string)")
+		_::docPropText
+			"It sets the layer's text color."
+			#SPANISH: "determina el color del texto"
+		_::docTitle3("fontStyle (css-font-family)")
+		_::docPropText
+			"It sets the font family (e.g. arial, verdana) for a layer's text content."
+			#SPANISH: "determina la fuente / tipografía del texto que contiene"
+		_::docTitle3("fontSize (css-font-size)")
+		_::docPropText
+			"It sets the content's font size."
+			#SPANISH: "determina el tamaño del texto"
+		_::docTitle3("zindex (integer)")
+		_::docPropText
+			"It determines stack order (which layer overlaps which), like in HTML and other layout systems."
+			#SPANISH: "determina la ubicación de profundidad (como en HTML y otros sistemas de layouts)"
+		_::docTitle3("overflow (yes | no)")
+		_::docPropText
+			"It determines if child layers are clipped or not when they overflow the parent's bounds. Default: yes."
+			#SPANISH: "determina si el contenido que contiene [PONER HIERARCHY ANTES?] por fuera de su propio rectángulo es o no es visible. Default: yes."
+		_::docTitle3("visible (yes | no)")
+		_::docPropText
+			"'no' hides the layer. Default: yes."
+			#SPANISH: "determina si el layer es visible. Default: yes."
+		_::docTitle3("multiline (yes | no)")
+		_::docPropText
+			"It determines if text content will be allowed to display in multiple lines. Default: yes."
+			#SPANISH: "determina si el texto contenido puede contener múltiples líneas. Default: yes"
+		_::docTitle3("link (href)")
+		_::docPropText
+			"It sets an hyperlink to follow when the layer is clicked."
+			#SPANISH: "determina un href"
+		_::docTitle3("img (css-img)")
+		_::docPropText
+			"It sets an image as the layer's background."
+			#SPANISH: "determina la imagen de fondo del layer"
+		_::docTitle3("icon (css-img)")
+		_::docPropText
+			"It sets the app's icon (favicon in HTML). Only valid in the root layer."
+			#SPANISH: "determina el icono de la aplicación (en HTML sería el favicon). Sólo sirve en root"
+
+		_docPropertiesEnd
+			top = prev.bottom
+
+docConstraints::docSection(_docConstraintsEnd.top)
+	_
+		_::docTitle("Constraints")
+		_::docTitle2("Introduction")
+		
+		_::docSubSectionText(3)
+			"Constraints define linear relationships (equalities or inequalities of linear combinations) between layers' attributes. That is to say, you can set a layer's attribute to depend on another's value, or a constant number, or both. Some examples:"
+		_::docSubSectionCode(5)
+			_
+				"layerA"
+				"    width = layerB.width * 2 + 10"
+				"    centerX = 250"
+				"    top >= layerC.bottom"
+				"    height = width"
+		_::docTitle2("Linear Combinations")
+		_::docSubSectionText
+			#"constant expressions, variable expressions, operators, comparators"
+			"Expressions can't be divided by attributes and two or more of them can't multiply each other."
+		_::docSubSectionText
+			#"constant expressions, variable expressions, operators, comparators"
+			link: http://en.wikipedia.org/wiki/Linear_combination
+			"http://en.wikipedia.org/wiki/Linear_combination"
+			textColor: blue
+		_::docTitle2("Chained Constraints")
+		_::docSubSectionCode
+			_
+				"exp1 <= exp2 = ... >= expN"
+		_::docSubSectionText
+			"would mean"
+		_::docSubSectionCode(3)
+			_
+				"exp1 <= exp2"
+				"exp2 =  ..."
+				"...  >= expN"
+		_::docTitle2("Packed Constraints")
+		_::docSubSectionText(2)
+			#SPANISH: "Dado que al menos se tienen que expresar cuatro atributos -dos horizontales y dos verticales- para definir las coordenadas de cada layer, esto puede resultar bastante repetitivo, por lo que Layx permite definir varios atributos de forma conjunta, de la forma (atti es attribute i, expi es expression i):"
+			"Since four attributes (two horizontal and two vertical) have to be defined for each layer to be positioned and sized, for convenience, multiple constraints can be simply defined in one line:"
+		_::docSubSectionCode
+			_
+				"exp1, exp2, ..., expN = exp # or exp = exp1, exp2, ..., expN"
+		_::docSubSectionText
+			"would mean"
+		_::docSubSectionCode(4)
+			_
+				"exp1 = exp"
+				"exp2 = exp"
+				"..."
+				"expN = exp"
+		_::docSubSectionText
+			"and"
+		_::docSubSectionCode
+			_
+				"exp1_1, exp1_2, ..., exp1_n = exp2_1, exp2_2, ..., exp2_N"
+		_::docSubSectionText
+			"would mean"
+		_::docSubSectionCode(4)
+			_
+				"exp1_1 = exp2_1"
+				"exp1_2 = exp2_2"
+				"..."
+				"exp1_N = exp2_N"
+		
+		_::docTitle2("Predefined packs")
+		_::docSubSectionText
+			"These groups of attributes are predefined:"
+		_::docSubSectionCode(4)
+			_
+				"position = left, top"
+				"size = width, height"
+				"rect = left, top, width, height"
+				"center = centerX, centerY"
+		_::docSubSectionText
+			"Those allow for an easier way to define more than one attribute simultaneously. For example:"
+		_::docSubSectionCode(3)
+			_
+				"layer"
+				"    position = 30, 40"
+				"    size = prev.size"
+		_::docTitle2("Null coalescing operator")
+		_::docSubSectionText(3)
+			"For situations in which a referenced layer might not exist, it's possible to fall back to an alternative with '|' (pipe character). This happens most often when referring to relative layers inside of classes."
+		_::docSubSectionCode(7)
+			_
+				"::menuItem(...)"
+				"    left = prev.right + 5 | super.left"
+				"    ..."
+				" "
+				"_::menuItem("Information")"
+				"_::menuItem("About")"
+				"_::menuItem("Layx")"
+		_::docSubSectionText(2)
+			"In this example, as the first menu item doesn't have a previous layer, its <span style='font-family: courier new;'>left</span> attribute will resolve to <span style='font-family: courier new;'>super.left</span>, while the others' to <span style='font-family: courier new;'>prev.right + 5</span>."
+		
+		_docConstraintsEnd
+			top = prev.bottom
+
+
+docEvents::docSection()
+	_
+		_::docTitle("Layers")
+		_::docTitle2("Events")
+		_::docSubSectionText
+			"Events determine the behavior of layers. They are set with exclamation sign:"
+		_::docSubSectionCode(2)
+			_
+				"layer"
+				"    !click: javascript_code"
+		_::docTitle2("More events coming soon")
+		_::docSubSectionText
+			"At this time Layx only supports the click event. More events coming soon."
+
+docClasses::docSection(_docClassesEnd.top)
+	_
+		_::docTitle("Classes")
+		_::docTitle2("Definition")
+		_::docSubSectionText
+			"Classes are defined by a double colon, with parameters at the end (if any) between parentheses:"
+		_::docSubSectionCode(6)
+			_
+				"::className(parameter, ..., optionalParameter = defaultValue, ...)"
+				"    # All stuff added here will be inherited to the instantiated layer"
+				"    # Properties, constraints and children can be added here"
+				" "
+				"::classWithoutParameters"
+				"    # If there are no parameters parentheses are not needed"
+		_::docTitle2("Instantiation")
+		_::docSubSectionText
+			"To instantiate from classes just add them using a double colon after the layer declaration:"
+		_::docSubSectionCode(2)
+			_
+				"layer::className(parameter, ...)::classWithoutParameters"
+				"    # Here you can add things about this particular layer"
+		_::docTitle2("Example")
+		_::docSubSectionCode(11)
+			_
+				"::button(text, color = green)"
+				"    rect = prev.right + 10 | super.left, super.top, 300, 50"
+				"    bgColor: color"
+				"    !click: alert(text)"
+				"    _"
+				"        center = super.center"
+				"        content: text"
+				" "
+				"_::button("Information")"
+				"_::button("About")"
+				"_::button("Layx", blue)"
+		_docClassesEnd
+			top = prev.bottom
+		
+docJavascript::docSection(_docJSEnd.top)
+	_
+		_::docTitle("JavaScript code")
+		_::docTitle3("Embedded")
+		_::docSubSectionText
+			"Layx lets you write JavaScript code after all layout is rendered adding the keyword <span style='font-family: courier new;'>progr<b></b>am</span>."
+		_::docSubSectionCode(6)
+			_
+				"layout"
+				"    ..."
+				""
+				"pro<b></b>gram"
+				"    // JavaScript code here"
+				"    alert('Hello!');"
+		_::docTitle3("Layx API &amp; Framework for JavaScript")
+		_::docSubSectionText
+			"Documentation coming soon."
+		_::docTitle3("Internal URLs")
+		_::docSubSectionText
+			"Documentation coming soon."
+		_docJSEnd
+			top = prev.bottom
+
+docCSS::docSection(_docCSSEnd.top)
+	_
+		_::docTitle("CSS Compatibility")
+		_::docTitle2("Embedded")
+		_::docSubSectionText
+			"To support CSS properties for layers, Layx extends its properties with:"
+		_::docSubSectionCode(2)
+			_
+				"layer"
+				"    css(property): value"
+		_::docTitle2("External")
+		_::docSubSectionText
+			"Each layer generates HTML tags with their same IDs; so an external CSS code can be used:"
+		_::docSubSectionCode(3)
+			_
+				"#layer_id {"
+				"    /* css definitions */"
+				"}"
+		_docCSSEnd
+			top = prev.bottom
+
+docNextReleases::docSection(_docNextEnd.top)
+	_
+		_::docTitle("Next releases")
+		_::docTitle2("Conditions (if-else)")
+		_::docSubSectionText
+			"Conditional layers and constraints."
+		_::docTitle2("Animations")
+		_::docSubSectionText
+			"Layers... moving across the screen."
+		_::docTitle2("Inputs")
+		_::docSubSectionText
+			"Text boxes, combo boxes, maybe sliders, etc."
+		_::docTitle2("More Attributes")
+		_::docSubSectionText
+			"<span style='font-family: courier new;'>leading</span> and <span style='font-family: courier new;'>trailing</span> (right-to-left language support)"
+		_docNextEnd
+			top = prev.bottom
+program
+
+layx.URLs = {
+	'' : '?download', // First URL
+	'?download' : { title: 'Download | Layx', contents: {
+		info: 'down'
+	}, loaders: {
+		info: 'infoLoader'
+	}, scrollY: 0 },
+	'?docs' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docIntroduction'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 }, //views['info'].top.value - views['menubar'].height.value
+	'?docs.layers' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docLayers'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 }, //views['info'].top.value - views['menubar'].height.value
+	'?docs.attributes' : { title: 'Documents | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docAttributes'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?docs.hierarchy' : { title: 'Documents | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docHierarchy'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?docs.properties' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docProperties'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?docs.constraints' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docConstraints'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?docs.events' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docEvents'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?docs.classes' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docClasses'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?docs.javascript' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docJavascript'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?docs.css' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docCSS'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?docs.next' : { title: 'Documentation | Layx', contents: {
+		info: 'doc',
+		docsContentContainer: 'docNextReleases'
+	}, loaders: {
+		info: 'infoLoader',
+		docsContentContainer: 'docLoader'
+	}, scrollY: 0 },
+	'?community' : { title: 'Community | Layx', contents: {
+		info: 'com'
+	}, scrollY: 0 },
+	'?news' : { title: 'News | Layx', contents: {
+		info: 'news'
+	}, scrollY: 0 },
+	'?about' : { title: 'About | Layx', contents: {
+		info: 'about'
+	}, scrollY: 0 },
+	'?donate' : { title: 'Donate | Layx', contents: {
+		info: 'donate'
+	}, scrollY: 0 }
+};
+
+layx.urlLoaded = function(urlID) {
+	var buttons = layx.views['menubar'].children[2].children;
+	for (var i = 0; i < buttons.length; i++) {
+		buttons[i].children[0].setTextColor('BBB');
+	}
+	var index = -1;
+	if (urlID == '?download') index = 0;
+	else if (urlID.substr(0, 5) == '?docs') index = 1;
+	else if (urlID == '?community') index = 2;
+	else if (urlID == '?news') index = 3;
+	else if (urlID == '?about') index = 4;
+	else if (urlID == '?donate') index = 5;
+	if (index >= 0) {
+		buttons[index].children[0].setTextColor('FFF');
+	}
+
+	if (urlID.substr(0, 5) == '?docs') {
+		var docButtons = layx.views['docMenu'].children[0].children;
+		for (var i = 0; i < docButtons.length - 1; i++) {
+			docButtons[i].div.css('font-weight', 'normal');
+		}
+		index = -1;
+		if (urlID == '?docs') index = 0;
+		else if (urlID == '?docs.layers') index = 2;
+		else if (urlID == '?docs.attributes') index = 3;
+		else if (urlID == '?docs.hierarchy') index = 4;
+		else if (urlID == '?docs.properties') index = 5;
+		else if (urlID == '?docs.events') index = 6;
+		else if (urlID == '?docs.constraints') index = 7;
+		else if (urlID == '?docs.classes') index = 8;
+		else if (urlID == '?docs.javascript') index = 9;
+		else if (urlID == '?docs.css') index = 10;
+		else if (urlID == '?docs.next') index = 11;
+		if (index >= 0) {
+			docButtons[index].div.css('font-weight', 'bold');
+		}
+	}
+};
+
+function reportDownloads() {
+	if ($("#downloadButton").length > 0)
+	$("#downloadButton").get(0).onclick = function() { ga('send', 'pageview', '/?download-alone-click'); };
+	else setTimeout(reportDownloads, 500);
+}
+reportDownloads();
+
+function reportDownloadsExamples() {
+/*
+	if ($("#downloadButtonExamples").length > 0)
+	$("#downloadButtonExamples").get(0).onclick = function() { ga('send', 'pageview', '/?download-examples-click'); };
+	else setTimeout(reportDownloadsExamples, 500);
+*/
+}
+reportDownloadsExamples();

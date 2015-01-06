@@ -1,0 +1,55 @@
+root
+	bgColor: black
+	_
+		width = 0.25 * root.width # SINGLE LINE COMMENT
+		height = 10 #= SIMPLE MULTILINE COMMENT (IN ONE LINE LOL) =# + 100
+		centerX = #= A COMMENT =# 10 #= ## #=  #= == UGLY COMMENT = # # ### =# + super.centerX#=MORE COMMENTS=#* 0.5
+		bgColor: blue
+		#=
+			REAL MULTILINE COMMENT
+			LALA ### #= # === ###
+			LARI LARA
+			
+		bgColor: red
+			
+
+		=#
+		
+		#= 
+			ANOTHER ONE
+		=# # PELASE DON'T WRITE ANYTHING HERE, IT WOULD WORK BUT THE INDENTATION IN THIS LINE IS SCREWED
+		#= FOR EXAMPLE:
+		=#		"2 tabs precede this text :("
+		
+		# SINGLE LINE COMMENTS: #= DOESN'T #= #= #= DO =# ANYTHING =# =# =# HERE :)
+		
+		centerY = super.centerY
+		
+		
+	#=
+	
+		MULTILINE COMMENTS ARE NOT NESTED (YET)
+		I CAN WRITE
+		#= #= #=
+		BUT IF I WRITE THE CLOSING THING IN HERE, IT BREAKS, SO BE CAREFUL
+		
+	=#
+	_
+		size = 160, 40
+		position = 50 #=
+		MULTILINE COMMENTS CAN START ON A LINE WITH GOOD CODE
+		=#
+		bgColor: green
+		"A=#B#C#=D=#E#=F" # COMMENTS IN STRINGS (NOTICE D IS NOT IN THERE, THAT'S BAD BAD PARSER)
+	
+	_
+		bgColor: red
+		size = prev.size
+		position = prev.left, prev.bottom + 5
+		
+		# THIS DOESN'T WORK:
+		# "A #= B" #= HEY =#
+		# NOR THIS:
+		# "A #= B" # #= HEY =#
+		# AND JUST LOOK AT THIS:
+		"HAHA #= LOL" # #= HEY =# OH WOW" # D:

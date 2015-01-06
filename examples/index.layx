@@ -1,0 +1,4 @@
+root
+	_
+		"URL: /?layoutFile=example_to_open.layx"
+		centerX, centerY = root.centerX, root.centerY

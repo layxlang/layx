@@ -1,0 +1,27 @@
+root
+	first
+		rect = 120
+		bgColor: green
+		css(box-shadow): 0px 0px 5px #000
+		css(border): 10px solid orange # Doesn't matter about position! ;)
+		css(padding): 10px 5px # Doesn't matter about position! ;)
+		css(margin): 100px # Doesn't matter about position! ;)
+		papa
+			center = super.center
+			size = 20
+			bgColor: yellow
+		_
+			position = super.position
+			size = 20
+			bgColor: blue
+		_
+			right, top = super.right, super.top
+			size = 30
+			bgColor: black
+	_
+		position = first.right + 10, first.top
+		css(border-radius): 5px
+		css(padding): 10px
+		size = 120
+		bgColor: red
+		"I'm CSS padded"
