@@ -1,7 +1,7 @@
 Layx
 ====
 
-Layout Language (made with love :)
+Layx is a simple new layout language for web -and for mobile platforms in the future- based on Cassowary, the constraint solving toolkit Apple is using for their user interfaces (Auto Layout). It is designed to be simple and easy to learn, read and write.
 
 ### Resources
 
