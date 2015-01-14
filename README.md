@@ -10,6 +10,6 @@ It is designed to be simple and easy to learn, read and write.
 - **Homepage:** <http://www.layx.org/>
 - **Download:** <http://www.layx.org/?download>
 - **Documentation:** <http://www.layx.org/?docs>
+- **Online Demo:** <http://www.layx.org/demo/>
 - **Source code:** <https://github.com/layxlang/layx>
 - **Git clone URL:** <https://github.com/layxlang/layx.git>
-- **Online Demo:** <http://www.layx.org/demo/>
