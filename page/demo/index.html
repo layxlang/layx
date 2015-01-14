@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="description" content="The layx layout language demo."/>
+<meta name="keywords" content="testing, demo, try, layout, graphic, design, language, web, simple, easy, best, programming"/>
+<meta property="og:site_name" content="Layx"/>
+<meta property="og:title" content="Layx | Demo"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="http://www.layx.org/resources/layx-icon-medium3.png"/>
+<meta property="og:url" content="http://www.layx.org/"/>
+<meta property="og:description" content="The easiest layout language, ever."/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:domain" content="www.layx.org"/>
+<meta name="twitter:title" content="Layx | Demo"/>
+<meta name="twitter:description" content="The layx layout language demo."/>
+<meta name="twitter:image" content="http://www.layx.org/resources/layx-icon-medium3.png"/>
+<link rel="shortcut icon" href="http://www.layx.org/resources/layx-favicon.png"/>
+<title>Demo | Layx</title>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+* {
+    height: 100%;
+    width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	box-sizing: border-box;
+	-moz-tab-size:4; -o-tab-size:4; tab-size:4;
+}
+body { padding: 10px; }
+</style>
+<meta charset="utf-8">
+</head><body style="background-color: #EEE; text-align: center;">
+
+<script language="layx" class="example" data-name="Hello World!">
+# This is a comment =)
+root
+	_
+		"Hello World!"
+		center = root.center
+</script>
+
+<script language="layx" class="example" data-name="Rule of thirds">
+#=
+ And this is a
+ multiline comment ;)
+=#
+root
+	_
+		center = super.center
+		size = super.(width/3, height/3)
+		bgColor: 900
+	_
+		center = prev.position
+		size = 30 # square
+		bgColor: rgba(0,0,0,0.5)
+</script>
+
+<script language="layx" class="example" data-name="Constraint chain">
+# Constraint chain: a <= b <= c, etc...
+root
+	layerA # Layers can have names to be referred to
+		bgColor: red
+		
+		# The line below tries to expand the layer
+		width, height = 10000000
+		
+		# But as the <= and >= have more priority than = and it is not
+		# possible to find a perfect solution, the closest one is picked
+		100 <= left, top <= right, bottom <= window.right - 100, window.bottom - 100
+		
+	layerB
+		bgColor: blue
+		left, top = layerA.left + 5, layerA.top + 5
+		100 <= width, height <= layerA.width * 0.5, layerA.height * 0.5
+
+</script>
+
+
+<script language="layx" class="example" data-name="Classes">
+::colored(someColor)
+	bgColor: someColor
+
+::button(someColor, name, padding = 10)
+	top = 10
+	left = prev.right + 10
+	_
+		bgColor: someColor
+		content: name
+		center = super.center
+		left = super.left + padding
+		top = super.top + padding
+
+root
+	bgColor: black
+	_
+		_
+			left = 10
+			width = 0
+		myButton::button(blue, "Hello")
+			bgColor: green
+		_::button(red, "how", 20)::colored(orange)
+		_::button(red, "are you? :D")
+</script>
+<script language="layx" class="example" data-name="CSS">
+root
+	first
+		rect = 120
+		bgColor: green
+		css(box-shadow): 0px 0px 5px #000
+		css(border): 10px solid orange # This doesn't affect position! ;)
+		css(padding): 10px 5px # This doesn't affect position! ;)
+		css(margin): 100px # This doesn't affect position! ;)
+		_
+			center = super.center
+			size = 20
+			bgColor: yellow
+		_
+			position = super.position
+			size = 20
+			bgColor: blue
+		_
+			right, top = super.right, super.top
+			size = 30
+			bgColor: black
+	_
+		position = first.right + 10, first.top
+		css(border-radius): 5px
+		css(padding): 10px
+		size = 120
+		bgColor: red
+		"I'm CSS padded"
+</script>
+<script language="layx" class="example" data-name="Distributive syntax">
+root
+	#================================================
+	# Pseudo-concentric squares
+	#===============================================#
+	_
+		rect = 150
+		bgColor: orange
+	_
+		rect = prev.(position, width - 10, height - 10)
+		bgColor: purple
+	_
+		rect = prev.(left + 10, top + 10, width - 20), prev.height - 20
+		bgColor: red
+	_
+		rect = prev.(left + 10, top + 10), prev.(width - 20, height - 20)
+		bgColor: blue
+	_
+		# ESTO: center, size = prev.center, 20 ; NO funciona por tener 4 params = 3 params
+		center = prev.center
+		size = 50
+		bgColor: pink
+	
+	#================================================
+	# Corner
+	#===============================================#
+	_
+		top, left = super.(top + 10, left + 10)
+		width, height = 100
+		bgColor: green
+		a
+			bgColor: pink
+			left, top, width, height = super.(left + 20, top + 20, 10, 10)
+			_
+				rect = a.(super.left + 10, super.top + 10), a.super.(width, height)
+				bgColor: black
+			este
+				left, top = a.(super.left + 10, super.top + 10)
+				# 'this' is still this layer (este)
+				# a sum of this line should be: a.width + este.prev.width
+				width, height = a.(width + this.prev.width / 3, height + this.prev.height / 3)
+				bgColor: orange
+				_
+					position = super.(right, bottom)
+					size = 30
+					bgColor: gray
+
+	#================================================
+	# Right
+	#===============================================#
+	_
+		rect = root.children[0].right + 10, 10, 200, 150
+		bgColor: green
+	_
+		rect = prev.(right + 10, top), 50, 100
+		bgColor: blue
+	_
+		# Check this awesomeness! rect = a.position, b.size
+		rect = prev(2).position, prev.size
+		bgColor: black
+</script>
+<script language="layx" class="example" data-name="Or / Pipe">
+root
+	_
+		rect = 10, 10, 300, 300
+		bgColor: green
+		_::nice("A")
+		_::nice("B")
+		_::nice("C")
+
+::nice(text)
+	right = next.left - 10 | super.right - 30
+	top = (prev.bottom | super.top) + 30
+	size = children[10].width | prev(10000).height | 50, 30
+	bgColor: yellow
+	_
+		center = super.center
+		text
+</script>
+<script language="layx" class="example" data-name="Previous and Next">
+root
+	_
+		"1"
+		bgColor: red
+		rect = 100
+	_
+		"2"
+		bgColor: green
+		rect = prev.left, next.top, prev.width, next.top
+	_
+		"3"
+		bgColor: blue
+		rect = 210
+</script>
+<script language="layx" class="example" data-name="Relatives">
+root
+	_
+		"A"
+		bgColor: red
+		left, top = 50
+		width, height = 200
+		_
+			"B"
+			bgColor: green
+			right, bottom = super.right - 10, super.bottom - 10
+			left, top = super.left + 10, super.top + 10
+			_
+				"C"
+				bgColor: blue
+				# super.super
+				right, bottom = super.super.right - 20, super.super.bottom - 20
+				left, top = super.super.left + 20, super.super.top + 20
+				-
+					"D"
+					bgColor: orange
+					# super(3)
+					right, bottom = super(3).right - 30, super(3).bottom - 30
+					left, top = super(3).left + 30, super(3).top + 30
+		_
+			bgColor: black
+			# children[i]
+			centerX, top, bottom = super.centerX, prev.children[0].children[0].bottom, super.bottom
+			width = height
+	_
+		"1"
+		bgColor: red
+		left, top = prev.right + 10, prev.top
+		width, height = 70
+	_
+		"2"
+		bgColor: green
+		left, top = 10
+		width, height = 40
+	_
+		"3"
+		bgColor: blue
+		# prev.prev... & prev(3)
+		left, top = prev.prev.right + 10, prev(2).top
+		height = prev(3).height
+		width = next.width
+	
+	_
+		bgColor: purple
+		# Combination relative(...).children[...]
+		centerX = prev(4).children[1].centerX
+		top = prev(4).children[1].bottom
+		width, height = prev(4).children[1].width
+
+	id
+		"ID"
+		bgColor: red
+		top, left = prev(2).top, prev(2).right + 10
+		width, height = 120
+		_
+			bgColor: blue
+			left, top = super.left, super.top
+			width, height = 30
+		_
+			bgColor: blue
+			right, bottom = super.right, super.bottom
+			width, height = 40
+			
+	_
+		# id.children[...]
+		bottom, left = id.children[0].bottom, id.children[1].left
+		height = id.children[1].prev.height
+		width = 200
+		bgColor: orange
+		_
+			# layer.relative(...) / mix
+			"ID related"
+			bottom, right = this.super(1).bottom, this.super(1).right
+			bgColor: green
+
+	_
+		"ID related 2"
+		top, left = id.super(1).children[6].bottom, id.super(1).children[6].right
+		bgColor: yellow
+</script>
+<div id="ide" style="width: 49%; height: 100%; display: inline-block; vertical-align: top; margin-right: 10px;">
+<div style="height: 8%; margin-bottom: 10px; text-align: left; font-family: sans-serif; padding-right: 5px; color: #666; font-size: 11pt;">
+	<span style="display: table; width: auto; float: right;">
+		<span style="display: table-cell; vertical-align: middle;">
+			<a href="http://www.layx.org/" target="_blank" style="text-decoration: none; color: #888;">www.layx.org</a>
+		</span>
+	</span>
+	<a href="http://www.layx.org/" target="_blank" style="text-decoration: none; color: #666;">
+	<img src="layx-icon.png" style="width: auto; vertical-align: middle;"/>
+	<span style="width: auto; display: inline-block; vertical-align: middle;">
+		<span style="display: table;"><span style="display: table-cell; vertical-align: middle; line-height: 130%;">
+			<span style="font-size: 100%;">Layx</span><br/><span style="color: #BBB;">Layout Language</span>
+		</span></span>
+	</span>
+	</a>
+	<div style="clear: both;"></div>
+</div>
+
+<select id="examples" style="height: 40px; border: 1px solid #AAA; margin-bottom: 10px; padding: 0px 10px; font-size: 10pt; background-color: #FAFAFA;"></select>
+<textarea id="code" style="height: 60%; width: 100%; padding: 15px; border: 1px solid #AAA; overflow: scroll; font-family: monospace,courier new; font-size: 10pt;" wrap="off"></textarea>
+<script>
+function codeChanged() {
+		document.getElementById('renderButton').style.fontWeight = 'bold';
+}
+document.getElementById('code').onkeydown = function(e) {
+	// http://stackoverflow.com/a/6637396/1112654
+	var keyCode = e.keyCode || e.which;
+	if (keyCode == 9) {
+		e.preventDefault();
+		var start = this.selectionStart;
+		var end = this.selectionEnd;
+		this.value = this.value.substring(0, start) + "\t" + this.value.substring(end);
+		this.selectionStart = this.selectionEnd = start + 1;
+	}
+	if (keyCode == 13 && (e.ctrlKey || e.metaKey)) {
+		e.preventDefault();
+		render();
+	}
+};
+document.getElementById('code').oninput = codeChanged;
+
+function render() {
+	var iframe = document.getElementById('rootIFrame');
+	var code = document.getElementById('code').value;
+	if (iframe.src == '')
+		iframe.src = 'renderer.html';
+	else
+		iframe.contentWindow.location.reload();
+	iframe.onload = function() {
+		iframe.contentWindow.render(code);
+	};
+	document.getElementById('renderButton').style.fontWeight = 'normal';
+}
+document.body.onload = render;
+
+var examples = document.getElementsByClassName('example');
+document.getElementById('code').value = examples[0].innerHTML.trim() + '\n';
+$('#examples').on('keyup change', function() {
+	document.getElementById('code').value = examples[this.value].innerHTML.trim() + '\n';
+	render();
+	$('#code').get(0).selectionStart = $('#code').get(0).selectionEnd = 0;
+	$('#examples').blur().focus();
+});
+for (var i = 0; i < examples.length; i++) {
+	$('#examples').append('<option style="padding: 7px 10px;" value="'+i+'">'+examples[i].getAttribute('data-name')+'</option>');
+}
+
+
+</script>
+<input id="renderButton" type="button" value="Render (Ctrl + Enter)" style="margin-top: 10px; height: 15%; font-family: sans-serif; font-size: 20px; background-color: #999; color: rgba(255, 255, 255, 0.9);" onclick="render();"/>
+</div><iframe id="rootIFrame" style="width: 49%; height: 100%; vertical-align: top; border: 1px solid #AAA; background-color: #FFF;"></iframe>
+</body></html>

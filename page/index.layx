@@ -138,7 +138,7 @@ down
 	content.bottom = downGrayBar.bottom + (window.height - footer.height - menubar.height) - downGrayBar.height - 80
 	_
 		center = super.centerX, (menubar.bottom + next.top) / 2
-		size = super.width, children[4].bottom - children[0].top
+		size = super.width, children[5].bottom - children[0].top
 		#bgColor: red
 		_
 			top = super.top
@@ -154,8 +154,7 @@ down
 			link: resources/layx-alpha-0.1.zip
 			size = children[0].width + 50, children[0].height + 30
 			# Average! :)
-			#(left + next.right) / 2 = info.centerX
-			centerX = info.centerX
+			(left + next.right) / 2 = info.centerX
 			centerY = (menubar.bottom + downGrayBar.top) / 2
 			bgColor: 900
 			_
@@ -167,6 +166,18 @@ down
 				center = prev.(centerX, (baseline + super.bottom) / 2 - 1)
 				textColor: rgba(255,255,255,0.6)
 				fontSize: 12px
+		
+		tryItButton
+			link: demo/
+			size = children[0].width + 50, children[0].height + 30
+			left = prev.right + 15
+			centerY = (menubar.bottom + downGrayBar.top) / 2
+			bgColor: FFF
+			css(border): 2px solid rgb(151,0,0)
+			_
+				"Try the Demo"
+				center = super.center
+				textColor: 900
 				
 		#=
 		downloadButtonExamples
