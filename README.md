@@ -12,3 +12,4 @@ It is designed to be simple and easy to learn, read and write.
 - **Documentation:** <http://www.layx.org/?docs>
 - **Source code:** <https://github.com/layxlang/layx>
 - **Git clone URL:** <https://github.com/layxlang/layx.git>
+- **Online Demo:** <http://www.layx.org/demo/>
