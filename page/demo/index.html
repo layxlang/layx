@@ -7,7 +7,7 @@
 <meta property="og:title" content="Layx | Demo"/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="http://www.layx.org/resources/layx-icon-medium3.png"/>
-<meta property="og:url" content="http://www.layx.org/"/>
+<meta property="og:url" content="http://www.layx.org/demo/"/>
 <meta property="og:description" content="The easiest layout language, ever."/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:domain" content="www.layx.org"/>
@@ -149,7 +149,10 @@ root
 		rect = prev.(left + 10, top + 10), prev.(width - 20, height - 20)
 		bgColor: blue
 	_
-		# ESTO: center, size = prev.center, 20 ; NO funciona por tener 4 params = 3 params
+		# It's not possible to reduce the next two lines to:
+		#    center, size = prev.center, 20
+		# as that would be 4 params equaled to 3 params:
+		#    centerX, centerY, width, height = centerX, centerY, 20 <-- invalid
 		center = prev.center
 		size = 50
 		bgColor: pink
@@ -161,17 +164,16 @@ root
 		top, left = super.(top + 10, left + 10)
 		width, height = 100
 		bgColor: green
-		a
+		layerA
 			bgColor: pink
 			left, top, width, height = super.(left + 20, top + 20, 10, 10)
 			_
-				rect = a.(super.left + 10, super.top + 10), a.super.(width, height)
+				rect = layerA.(super.left + 10, super.top + 10), layerA.super.(width, height)
 				bgColor: black
-			este
-				left, top = a.(super.left + 10, super.top + 10)
-				# 'this' is still this layer (este)
-				# a sum of this line should be: a.width + este.prev.width
-				width, height = a.(width + this.prev.width / 3, height + this.prev.height / 3)
+			thisLayer
+				left, top = layerA.(super.left + 10, super.top + 10)
+				# 'this' is still this layer (thisLayer)
+				width, height = layerA.(width + this.prev.width / 3, height + this.prev.height / 3)
 				bgColor: orange
 				_
 					position = super.(right, bottom)
@@ -310,6 +312,59 @@ root
 		top, left = id.super(1).children[6].bottom, id.super(1).children[6].right
 		bgColor: yellow
 </script>
+
+<script language="layx" class="example" data-name="&#9658; Action time!">
+root
+	textColor: white
+
+	_::button("More JavaScript?", blue)
+		!click: alert(':)');
+
+	container
+		rect = prev.(left, bottom + 20, size)
+		page1::pageContent('?second', "Click to load content", green)
+
+	_::button("Link to www.layx.org")
+		link: http://www.layx.org/
+
+# Pages
+page2::pageContent('?third', "Not yet... (click again)", orange)
+page3::pageContent('?fourth', "And again!", purple, yellow)
+page4::pageContent('?first', "Loaded :)", black, 0F0)
+
+# Classes
+::button(text, bcolor = red, tcolor = white)
+		textColor: tcolor
+		bgColor: bcolor
+		centerX = root.centerX
+		top = prev.bottom + 20 | (root.height - (root.children[2].bottom - root.children[0].top)) / 2
+		size = root.(width / 2, height / 4)
+		_
+			text
+			center = super.center
+
+::pageContent(url, text, bcolor, tcolor)
+	textColor: tcolor
+	bgColor: bcolor
+	rect = super.rect
+	!click: layx.loadURL(url)
+	_
+		text
+		center = super.center
+
+program
+
+alert('Welcome to the action example!');
+
+layx.URLs = {
+	'' : '?first',
+	'?first' : { contents: { container: 'page1' }},
+	'?second' : { contents: { container: 'page2' }},
+	'?third' : { contents: { container: 'page3' }},
+	'?fourth' : { contents: { container: 'page4' }}
+};
+</script>
+
 <div id="ide" style="width: 49%; height: 100%; display: inline-block; vertical-align: top; margin-right: 10px;">
 <div style="height: 8%; margin-bottom: 10px; text-align: left; font-family: sans-serif; padding-right: 5px; color: #666; font-size: 11pt;">
 	<span style="display: table; width: auto; float: right;">
