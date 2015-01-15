@@ -333,15 +333,14 @@ page3::pageContent('?fourth', "And again!", purple, yellow)
 page4::pageContent('?first', "Loaded :)", black, 0F0)
 
 # Classes
-::button(text, bcolor = red, tcolor = white)
-		textColor: tcolor
-		bgColor: bcolor
-		centerX = root.centerX
-		top = prev.bottom + 20 | (root.height - (root.children[2].bottom - root.children[0].top)) / 2
-		size = root.(width / 2, height / 4)
-		_
-			text
-			center = super.center
+::button(text, color = red)
+	bgColor: color
+	centerX = root.centerX
+	top = prev.bottom + 20 | (root.height - (root.children[2].bottom - root.children[0].top)) / 2
+	size = root.(width / 2, height / 4)
+	_
+		text
+		center = super.center
 
 ::pageContent(url, text, bcolor, tcolor)
 	textColor: tcolor
