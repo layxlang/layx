@@ -39,12 +39,26 @@ root
 		"Hello World!"
 		center = root.center
 </script>
-
-<script language="layx" class="example" data-name="Rule of thirds">
+<script language="layx" class="example" data-name="Previous &amp; Next">
 #=
  And this is a
  multiline comment ;)
 =#
+root
+	_
+		"1"
+		bgColor: red
+		rect = 100
+	_
+		"2"
+		bgColor: green
+		rect = prev.left, next.top, prev.width, next.top
+	_
+		"3"
+		bgColor: blue
+		rect = 210
+</script>
+<script language="layx" class="example" data-name="Rule of thirds">
 root
 	_
 		center = super.center
@@ -82,8 +96,7 @@ root
 	bgColor: someColor
 
 ::button(someColor, name, padding = 10)
-	top = 10
-	left = prev.right + 10
+	position = prev.right + 10, 10
 	_
 		bgColor: someColor
 		content: name
@@ -95,12 +108,13 @@ root
 	bgColor: black
 	_
 		_
-			left = 10
-			width = 0
+			left, width = 10, 0
 		myButton::button(blue, "Hello")
 			bgColor: green
 		_::button(red, "how", 20)::colored(orange)
-		_::button(red, "are you? :D")
+		_::button(pink, "are")
+		_::button(violet, "you?", 5)::colored(yellow)
+		_::button(lightgreen, ":D")
 </script>
 <script language="layx" class="example" data-name="CSS">
 root
@@ -194,6 +208,7 @@ root
 		rect = prev(2).position, prev.size
 		bgColor: black
 </script>
+
 <script language="layx" class="example" data-name="Or / Pipe">
 root
 	_
@@ -212,21 +227,7 @@ root
 		center = super.center
 		text
 </script>
-<script language="layx" class="example" data-name="Previous and Next">
-root
-	_
-		"1"
-		bgColor: red
-		rect = 100
-	_
-		"2"
-		bgColor: green
-		rect = prev.left, next.top, prev.width, next.top
-	_
-		"3"
-		bgColor: blue
-		rect = 210
-</script>
+
 <script language="layx" class="example" data-name="Relatives">
 root
 	_
