@@ -443,6 +443,7 @@ function render() {
 		iframe.contentWindow.location.reload();
 	iframe.onload = function() {
 		iframe.contentWindow.render(code);
+		iframe.contentWindow.scrollTo(0, 0);
 	};
 	document.getElementById('renderButton').style.fontWeight = 'normal';
 }
