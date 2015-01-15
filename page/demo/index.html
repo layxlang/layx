@@ -313,6 +313,35 @@ root
 		bgColor: yellow
 </script>
 
+<script language="layx" class="example" data-name="Window layer">
+root
+	height = window.height + 200
+	_
+		"Low speed"
+		centerX, top = super.centerX, 420 + window.top * 0.3
+	_
+		"Normal speed"
+		centerX, top = super.centerX, 450 # No relation with window
+	_
+		"High speed"
+		centerX, top = super.centerX, 480 - window.top * 0.3
+	_
+		"^.^ Light speed ^.^"
+		css(text-shadow): 0px 0px 5px rgb(0,255,0)
+		centerX, top = super.centerX, 1600 - window.top * 6.12
+	_
+		bgColor: 0A0
+		centerX, top, size = window.centerX, window.top + 50, 300, 100
+		_
+			size = 100
+			centerY, left = super.centerY, super.left + window.top
+			bgColor: black
+		_
+			"&lArr; Scroll to bottom &rArr;"
+			textColor: rgba(255,255,255,0.5)
+			center = super.center
+</script>
+
 <script language="layx" class="example" data-name="&#9658; Action time!">
 root
 	textColor: white
