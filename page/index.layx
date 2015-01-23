@@ -513,6 +513,59 @@ donate
 
 ###### DOCUMENTATION SECTIONS ######
 
+## PREV & NEXT BUTTONS ##
+
+::docNav(prevURL, nextURL)
+	right = super.right - 10
+	top = super.top + 10
+	bottom = super.bottom - 10
+	width = 1
+	
+	_::docNavButton("Previous", top, prevURL)
+		
+	_::docNavButton("Next", top, nextURL)
+		left = prev.right + 10
+	
+	_::docNavButton("Previous", bottom, prevURL)
+	
+	_::docNavButton("Next", bottom, nextURL)
+		left = prev.right + 10
+
+::docNavOnlyNext(nextURL)
+	right = super.right - 10
+	top = super.top + 10
+	bottom = super.bottom - 10
+	width = 1
+		
+	_::docNavButton("Next", top, nextURL)
+	
+	_::docNavButton("Next", bottom, nextURL)
+
+::docNavOnlyPrev(prevURL)
+	right = super.right - 10
+	top = super.top + 10
+	bottom = super.bottom - 10
+	width = 1
+		
+	_::docNavButton("Previous", top, prevURL)
+	
+	_::docNavButton("Previous", bottom, prevURL)
+	
+::docNavButton(text, topOrBottom, docURL)
+	right = super.right @ 1
+	topOrBottom = super.topOrBottom
+	bgColor: 900
+	_
+		text
+		top = super.top + 5
+		left = super.left + 10
+		bottom = super.bottom - 5
+		right = super.right - 10
+		textColor: rgba(255, 255, 255, 0.9)
+		!click: layx.loadURL(docURL); ga('send', 'pageview', {page: docURL,title:layx.URLs[docURL? docURL:layx.URLs['']].title});
+
+## SECTION CLASSES ##
+
 ::docSection(contentBottom = 0) # There is another constraint to let at least the doc menu be fully shown
 	rect = docsContentContainer.rect
 	content.bottom >= contentBottom + 100
@@ -583,7 +636,7 @@ docLoader
 		"Loading..."
 		center = super.center
 
-
+## THE SECTIONS THEMSELVES ##
 
 docIntroduction::docSection(_docIntroductionEnd.top)
 	_
@@ -641,6 +694,7 @@ docIntroduction::docSection(_docIntroductionEnd.top)
 		=#
 		_docIntroductionEnd
 			top = prev.bottom
+	_::docNavOnlyNext('?docs.layers')
 
 
 docLayers::docSection(_docLayersEnd.top)
@@ -666,6 +720,7 @@ docLayers::docSection(_docLayersEnd.top)
 		
 		_docLayersEnd
 			top = prev.bottom
+	_::docNav('?docs', '?docs.attributes')
 
 docAttributes::docSection(_docAttributesEnd.top)
 	_
@@ -759,6 +814,7 @@ docAttributes::docSection(_docAttributesEnd.top)
 		
 		_docAttributesEnd
 			top = prev.bottom
+	_::docNav('?docs.layers', '?docs.hierarchy')
 
 
 
@@ -817,6 +873,7 @@ docHierarchy::docSection(_docHierarchyEnd.top)
 		
 		_docHierarchyEnd
 			top = prev.bottom
+	_::docNav('?docs.attributes', '?docs.properties')
 
 
 ::docPropText
@@ -906,6 +963,7 @@ docProperties::docSection(_docPropertiesEnd.top)
 
 		_docPropertiesEnd
 			top = prev.bottom
+	_::docNav('?docs.hierarchy', '?docs.events')
 
 docConstraints::docSection(_docConstraintsEnd.top)
 	_
@@ -1003,6 +1061,7 @@ docConstraints::docSection(_docConstraintsEnd.top)
 		
 		_docConstraintsEnd
 			top = prev.bottom
+	_::docNav('?docs.events', '?docs.classes')
 
 
 docEvents::docSection()
@@ -1018,6 +1077,7 @@ docEvents::docSection()
 		_::docTitle2("More events coming soon")
 		_::docSubSectionText
 			"At this time Layx only supports the click event. More events coming soon."
+	_::docNav('?docs.properties', '?docs.constraints')
 
 docClasses::docSection(_docClassesEnd.top)
 	_
@@ -1056,6 +1116,7 @@ docClasses::docSection(_docClassesEnd.top)
 				"_::button("Layx", blue)"
 		_docClassesEnd
 			top = prev.bottom
+	_::docNav('?docs.constraints', '?docs.javascript')
 		
 docJavascript::docSection(_docJSEnd.top)
 	_
@@ -1079,6 +1140,7 @@ docJavascript::docSection(_docJSEnd.top)
 			"Documentation coming soon."
 		_docJSEnd
 			top = prev.bottom
+	_::docNav('?docs.classes', '?docs.css')
 
 docCSS::docSection(_docCSSEnd.top)
 	_
@@ -1100,6 +1162,7 @@ docCSS::docSection(_docCSSEnd.top)
 				"}"
 		_docCSSEnd
 			top = prev.bottom
+	_::docNav('?docs.javascript', '?docs.next')
 
 docNextReleases::docSection(_docNextEnd.top)
 	_
@@ -1118,6 +1181,8 @@ docNextReleases::docSection(_docNextEnd.top)
 			"<span style='font-family: courier new;'>leading</span> and <span style='font-family: courier new;'>trailing</span> (right-to-left language support)"
 		_docNextEnd
 			top = prev.bottom
+	_::docNavOnlyPrev('?docs.css')
+
 program
 
 layx.URLs = {
