@@ -32,7 +32,7 @@ root
 				position = super.left, super.top + 10
 				fontStyle, textColor: Verdana, 666
 			logoSlogan
-				"Easiest Layout Language"
+				"The easiest Layout Language"
 				left, baseline = prev.right + 10, prev.baseline
 				fontStyle, fontSize, textColor: Verdana, 13px, 666
 
@@ -54,7 +54,7 @@ root
 			textColor: EEE
 
 		slogRight
-			"Easiest Layout Language"
+			"The easiest Layout Language"
 			fontStyle, fontSize, textColor: Verdana, 13px, BBB
 			right, baseline = prev.left - 10, prev.baseline
 		_
@@ -644,11 +644,11 @@ docIntroduction::docSection(_docIntroductionEnd.top)
 		_::docTitle2("The root of your design")
 		_::docSubSectionText
 			#"Welcome to the root of your design: your canvas. Here is where you will materialize all your designs with this simple but powerful language. It looks like this:"
-			"Welcome to the canvas in which all your ideas will be materialized:"
+			"Welcome to the canvas, in which all your ideas will be materialized:"
 		_::docCanvas
 			position = prev.(left + 10, bottom + 30)
 		_::docSubSectionText
-			"Yes, it's just a blank rectangle. It's called root."
+			"Yes, it's just a blank rectangle. It's called the root."
 		_::docTitle2("Coordinate system")
 		_::docSubSectionText(3)
 			"Layx's coordinate system determines precisely and mathematically the location of every layer in the canvas. Every coordinate exists inside the same system, the origin being always (0, 0), the top-left point of the canvas, incrementing towards the right and the bottom."
@@ -683,7 +683,7 @@ docIntroduction::docSection(_docIntroductionEnd.top)
 				center = super.center
 		_::docTitle2("Window")
 		_::docSubSectionText(4)
-			"Besides the root, there is a special layer called Window. Its size is always equal to the browser window's size, and it's position follows the scroll of the whole page. By referring to this layer, it becomes trivial to, for example, make something that sticks to a border of the window as the user scrolls."
+			"Besides the root, there is a special layer called Window. Its size is always equal to the browser window's size, and its position follows the scroll of the whole page. By referring to this layer, it becomes trivial to, for example, make something that sticks to a border of the window as the user scrolls."
 		
 		#= TODO: This :P
 		_::docTitle2("Next topic")
@@ -903,7 +903,7 @@ docProperties::docSection(_docPropertiesEnd.top)
 				"    property: value"
 		_::docTitle3("content (string)")
 		_::docPropTextML2
-			"It determines the text contained in the layer. Surrounded by double quotes, the property name ('content') can be explicit or implicit."
+			"Determines the text contained in the layer. Surrounded by double quotes, the property name ('content') can be explicit or implicit."
 			#"Determines the contained text. It also be used with quotes without the property name."
 		_::docSubSectionCode(5)
 			_
@@ -914,7 +914,7 @@ docProperties::docSection(_docPropertiesEnd.top)
 				"    "And I'm text too""
 		_::docTitle3("bgColor (css-color with no #)")
 		_::docPropText
-			"It sets the layer's background color. Valid examples: F0F0F0, red, rgba(0, 255, 0, 0.5)."
+			"Sets the layer's background color. Valid examples: F0F0F0, red, rgba(0, 255, 0, 0.5)."
 			#SPANISH: SPANISH: "determina el color del layer"
 		_::docTitle3("title (string)")
 		_::docPropText
@@ -922,23 +922,23 @@ docProperties::docSection(_docPropertiesEnd.top)
 			#SPANISH: "determina el tooltip (?)"
 		_::docTitle3("textColor (string)")
 		_::docPropText
-			"It sets the layer's text color."
+			"Sets the layer's text color."
 			#SPANISH: "determina el color del texto"
 		_::docTitle3("fontStyle (css-font-family)")
 		_::docPropText
-			"It sets the font family (e.g. arial, verdana) for a layer's text content."
+			"Sets the font family (e.g. arial, verdana) for a layer's text content."
 			#SPANISH: "determina la fuente / tipografía del texto que contiene"
 		_::docTitle3("fontSize (css-font-size)")
 		_::docPropText
-			"It sets the content's font size."
+			"Sets the content's font size."
 			#SPANISH: "determina el tamaño del texto"
 		_::docTitle3("zindex (integer)")
 		_::docPropText
-			"It determines stack order (which layer overlaps which), like in HTML and other layout systems."
+			"Determines stack order (which layer overlaps which), like in HTML and other layout systems."
 			#SPANISH: "determina la ubicación de profundidad (como en HTML y otros sistemas de layouts)"
 		_::docTitle3("overflow (yes | no)")
 		_::docPropText
-			"It determines if child layers are clipped or not when they overflow the parent's bounds. Default: yes."
+			"Determines if child layers are clipped or not when they overflow the parent's bounds. Default: yes."
 			#SPANISH: "determina si el contenido que contiene [PONER HIERARCHY ANTES?] por fuera de su propio rectángulo es o no es visible. Default: yes."
 		_::docTitle3("visible (yes | no)")
 		_::docPropText
@@ -946,19 +946,19 @@ docProperties::docSection(_docPropertiesEnd.top)
 			#SPANISH: "determina si el layer es visible. Default: yes."
 		_::docTitle3("multiline (yes | no)")
 		_::docPropText
-			"It determines if text content will be allowed to display in multiple lines. Default: yes."
+			"Determines if text content will be allowed to display in multiple lines. Default: yes."
 			#SPANISH: "determina si el texto contenido puede contener múltiples líneas. Default: yes"
 		_::docTitle3("link (href)")
 		_::docPropText
-			"It sets an hyperlink to follow when the layer is clicked."
+			"Sets an hyperlink to follow when the layer is clicked."
 			#SPANISH: "determina un href"
 		_::docTitle3("img (css-img)")
 		_::docPropText
-			"It sets an image as the layer's background."
+			"Sets an image as the layer's background."
 			#SPANISH: "determina la imagen de fondo del layer"
 		_::docTitle3("icon (css-img)")
 		_::docPropText
-			"It sets the app's icon (favicon in HTML). Only valid in the root layer."
+			"Sets the app's icon (favicon in HTML). Only valid in the root layer."
 			#SPANISH: "determina el icono de la aplicación (en HTML sería el favicon). Sólo sirve en root"
 
 		_docPropertiesEnd
@@ -1069,7 +1069,7 @@ docEvents::docSection()
 		_::docTitle("Layers")
 		_::docTitle2("Events")
 		_::docSubSectionText
-			"Events determine the behavior of layers. They are set with exclamation sign:"
+			"Events determine the behavior of layers. They are set with an exclamation sign:"
 		_::docSubSectionCode(2)
 			_
 				"layer"
