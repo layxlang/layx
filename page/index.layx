@@ -28,11 +28,12 @@ root
 			#	#right, bottom = content.right, copyright.top - 10
 			logoTitle
 				"Layx"
-				!click: layx.loadURL('');  ga('send', 'pageview', {page:"",title:layx.URLs[layx.URLs['']].title});
+				!click: layx.loadURL('./');  ga('send', 'pageview', {page:"",title:layx.URLs[layx.URLs['']].title});
 				left, centerY = super.left, super.top + menubar.height / 2
 				textColor: 666
 			logoSlogan
 				"The easiest Layout Language"
+				!click: layx.loadURL('./');  ga('send', 'pageview', {page:"",title:layx.URLs[layx.URLs['']].title});
 				fontSize, textColor: 14px, 666
 				left, baseline = prev.right + 10, prev.baseline
 
@@ -49,12 +50,14 @@ root
 		
 		layxRight
 			"Layx"
+			!click: layx.loadURL('./');  ga('send', 'pageview', {page:"",title:layx.URLs[layx.URLs['']].title});
 			right, top = content.right, logoTitle.top
 			fontSize: 20px # logoTitle.fontSize
 			textColor: EEE
 
 		slogRight
 			"The easiest Layout Language"
+			!click: layx.loadURL('./');  ga('send', 'pageview', {page:"",title:layx.URLs[layx.URLs['']].title});
 			fontSize, textColor: 14px, BBB
 			right, baseline = prev.left - 10, prev.baseline
 		_
@@ -1187,7 +1190,7 @@ program
 
 layx.URLs = {
 	'' : '?download', // First URL
-	'?download' : { title: 'Download | Layx', contents: {
+	'?download' : { title: 'Layx: The Layout Language', contents: {
 		info: 'down'
 	}, loaders: {
 		info: 'infoLoader'
