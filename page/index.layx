@@ -420,10 +420,18 @@ com
 		centerX, width = super.centerX, width
 		centerY, height = super.centerY, (children[1].bottom - children[0].top) * 1.25
 		_
-			"Community coming soon"
+			"We'd love to hear your feedback, or even better, your contributions!"
 			centerX = super.centerX
-			top = super.top
+			(top + 	comAskMail.bottom) / 2 = super.centerY
 		_
+			"Here's our repo: <a style=color:rgb(151,0,0); href=http://github.com/layxlang/layx>github.com/layxlang/layx</a>"
+			centerX = super.centerX
+			top = prev.bottom + 30
+		_
+			"Mailing list soon."
+			centerX = super.centerX
+			top = prev.bottom + 30
+		comAskMail
 			"Ask every<span style='display:none;'>person</span>thi<span>n</span>g@la<span style='display:none;'>nto</span>yx.org"
 			centerX, top = prev.centerX, prev.bottom + 40
 
