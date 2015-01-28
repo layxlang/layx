@@ -1190,7 +1190,7 @@ program
 
 layx.URLs = {
 	'' : '?download', // First URL
-	'?download' : { title: 'Layx: The Layout Language', contents: {
+	'?download' : { title: 'Layx: The layout language', contents: {
 		info: 'down'
 	}, loaders: {
 		info: 'infoLoader'
