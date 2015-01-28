@@ -554,15 +554,15 @@ donate
 ::docNavButton(text, topOrBottom, docURL)
 	right = super.right @ 1
 	topOrBottom = super.topOrBottom
-	bgColor: 900
+	bgColor: 555
+	!click: layx.loadURL(docURL); ga('send', 'pageview', {page: docURL,title:layx.URLs[docURL? docURL:layx.URLs['']].title});
 	_
 		text
-		top = super.top + 5
-		left = super.left + 10
-		bottom = super.bottom - 5
-		right = super.right - 10
+		top = super.top + 8
+		left = super.left + 16
+		bottom = super.bottom - 8
+		right = super.right - 16
 		textColor: rgba(255, 255, 255, 0.9)
-		!click: layx.loadURL(docURL); ga('send', 'pageview', {page: docURL,title:layx.URLs[docURL? docURL:layx.URLs['']].title});
 
 ## SECTION CLASSES ##
 
