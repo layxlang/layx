@@ -3,7 +3,7 @@ root
 	top = 0 @ 1000
 	bgColor: DDD
 	bottom = content.bottom + footer.height
-	fontStyle: sans-serif
+	fontStyle: Helvetica,Arial,sans-serif
 	content
 		centerX = root.centerX
 		400 <= width <= 1000
@@ -29,12 +29,12 @@ root
 			logoTitle
 				"Layx"
 				!click: layx.loadURL('');  ga('send', 'pageview', {page:"",title:layx.URLs[layx.URLs['']].title});
-				position = super.left, super.top + 10
-				fontStyle, textColor: Verdana, 666
+				left, centerY = super.left, super.top + menubar.height / 2
+				textColor: 666
 			logoSlogan
 				"The easiest Layout Language"
+				fontSize, textColor: 14px, 666
 				left, baseline = prev.right + 10, prev.baseline
-				fontStyle, fontSize, textColor: Verdana, 13px, 666
 
 	menubar
 		top >= window.top# + 50
@@ -49,13 +49,13 @@ root
 		
 		layxRight
 			"Layx"
-			right, top = content.right - 20, logoTitle.top
-			fontStyle: Verdana # logoTitle.fontSize
+			right, top = content.right, logoTitle.top
+			fontSize: 20px # logoTitle.fontSize
 			textColor: EEE
 
 		slogRight
 			"The easiest Layout Language"
-			fontStyle, fontSize, textColor: Verdana, 13px, BBB
+			fontSize, textColor: 14px, BBB
 			right, baseline = prev.left - 10, prev.baseline
 		_
 			_::menuButton("Download", "?download")
@@ -228,7 +228,7 @@ down
 			_
 				"EASY | SMALL CODE"
 				textColor: white
-				fontStyle: sans-serif
+				fontStyle: Helvetica,Arial,sans-serif
 				fontSize: 15px
 				bottom = baseline
 				position = super.(left + 10, top + 10)
@@ -260,7 +260,7 @@ down
 			_
 				"POWERFUL | BIG THINGS"
 				textColor: white
-				fontStyle: sans-serif
+				fontStyle: Helvetica,Arial,sans-serif
 				fontSize: 15px
 				bottom = baseline
 				position = super.(left + 10, top + 10)
@@ -284,7 +284,7 @@ down
 		#	_
 		#		"MULTIPLATFORM"
 		#		textColor: white
-		#		fontStyle: sans-serif
+		#		fontStyle: Helvetica,Arial,sans-serif
 		#		fontSize: 15px
 		#		position = super.(left + 10, top + 10)
 		#		zindex: 1 # TODO: First run classes codes!!
@@ -297,7 +297,7 @@ down
 			_
 				"THE MAXIMUM POWER"
 				textColor: white
-				fontStyle: sans-serif
+				fontStyle: Helvetica,Arial,sans-serif
 				fontSize: 15px
 				bottom = baseline
 				position = super.(left + 10, top + 10)
@@ -356,7 +356,7 @@ down
 
 doc
 	rect = info.rect
-	fontStyle: sans-serif
+	fontStyle: Helvetica,Arial,sans-serif
 	fontSize: 22px
 	_
 		left, top, right, bottom = super.left + 20, super.top + 10, super.right - 20, super.bottom
@@ -364,10 +364,10 @@ doc
 			# super.position # considerar como queda solo
 			position = super.(left, top - 10)
 			#top >= menubar.bottom + 50 @ 900
-			fontStyle: sans-serif
+			fontStyle: Helvetica,Arial,sans-serif
 			_
 				position = content.left, super.top
-				fontStyle: Helvetica, Arial, sans-serif
+				fontStyle: Helvetica,Arial,sans-serif
 				fontSize: 16px
 				_::docItem('?docs', "Introduction")
 				_::docItem('?docs.layers', "Layers")
@@ -390,7 +390,7 @@ doc
 			right = super.right + 30
 			bottom = super.bottom
 			fontSize: 17px
-			fontStyle: Helvetica,Arial, sans-serif
+			fontStyle: Helvetica,Arial,sans-serif
 			textColor: 222
 			css(text-align): justify
 
@@ -573,7 +573,7 @@ donate
 
 ::docTitle(title)
 	fontSize: 24px
-	fontStyle: sans-serif
+	fontStyle: Helvetica,Arial,sans-serif
 	position = super.left + 30, super.top + 35
 	content: title
 	bottom = baseline #TODO: Sin esto o height no funciona!
@@ -581,7 +581,7 @@ donate
 ::docTitle2(title)
 	fontSize: 19px
 	css(font-weight): bold
-	fontStyle: sans-serif
+	fontStyle: Helvetica,Arial,sans-serif
 	position = super.left + 30, prev.bottom + 40
 	right = super.right - 40
 	content: title
@@ -591,7 +591,7 @@ donate
 ::docTitle3(title)
 	fontSize: 16px
 	css(font-weight): bold
-	fontStyle: sans-serif
+	fontStyle: Helvetica,Arial,sans-serif
 	position = super.left + 30, prev.bottom + 30
 	right = super.right - 40
 	content: title
