@@ -162,11 +162,11 @@ down
 			bgColor: 900
 			_
 				"Download Layx"
-				center = super.(centerX, centerY - 3)
+				center = super.(centerX, centerY - 4)
 				textColor: rgba(255,255,255,0.9)
 			_
 				"alpha-0.1"
-				center = prev.(centerX, (baseline + super.bottom) / 2 - 1)
+				center = prev.(centerX, (baseline + super.bottom) / 2 - 2)
 				textColor: rgba(255,255,255,0.6)
 				fontSize: 12px
 		
@@ -179,8 +179,13 @@ down
 			css(border): 2px solid rgb(151,0,0)
 			_
 				"Try the Demo"
-				center = super.center
+				center = super.(centerX, centerY - 4)
 				textColor: 900
+			_
+				"with examples!"
+				center = prev.(centerX, (baseline + super.bottom) / 2 - 2)
+				textColor: rgba(151,0,0,0.5)
+				fontSize: 12px
 				
 		#=
 		downloadButtonExamples
