@@ -424,7 +424,7 @@ com
 			centerX = super.centerX
 			(top + 	comAskMail.bottom) / 2 = super.centerY
 		_
-			"Here's our repo: <a style=color:rgb(151,0,0); href=http://github.com/layxlang/layx>github.com/layxlang/layx</a>"
+			"Here's our repo: <a style=color:rgb(151,0,0); href=http://github.com/layxlang/layx target=_blank>github.com/layxlang/layx</a>"
 			centerX = super.centerX
 			top = prev.bottom + 30
 		_
