@@ -423,11 +423,11 @@ com
 	content.bottom >= 350
 	_
 		centerX, width = super.centerX, width
-		centerY, height = super.centerY, (children[1].bottom - children[0].top) * 1.25
+		centerY, height = super.centerY, (comAskMail.bottom - children[0].top)
 		_
 			"We'd love to hear your feedback, or even better, your contributions!"
 			centerX = super.centerX
-			(top + 	comAskMail.bottom) / 2 = super.centerY
+			top = super.top
 		_
 			"Here's our repo: <a style=color:rgb(151,0,0); href=http://github.com/layxlang/layx target=_blank>github.com/layxlang/layx</a>"
 			centerX = super.centerX
@@ -446,23 +446,16 @@ news
 	content.bottom >= 350
 	_
 		centerX, width = super.centerX, width
-		centerY, height = super.centerY, (children[1].bottom - children[0].top) * 1.25
+		centerY, height = super.centerY, (firstNews.bottom - children[0].top) * 1.1
 		_
-			"News coming soon"
-			centerX, top = super.centerX, super.top
-		#=
+			"<b>Jan 14, 2015</b>: <a href="http://www.layx.org/demo/" style="color:rgb(151,0,0);" target="_blank">Online Demo</a>"
+			centerX, top = super.centerX, prev.bottom + 30 | super.top
 		_
-			"News"
-			centerX, top = super.centerX, super.top
-		_
-			"09/08/2014: Layx alpha-0.1 released! =)"
-			centerX, top = prev.centerX, prev.bottom + 40
-		=#
-		_
-			"Ask every<span style='display:none;'>person</span>thi<span>n</span>g@la<span style='display:none;'>nto</span>yx.org"
-			centerX, top = prev.centerX, prev.bottom + 40
-		
-
+			"<b>Jan 6, 2015</b>: <a href="http://github.com/layxlang/layx" style="color:rgb(151,0,0);" target="_blank">Open Source</a>"
+			centerX, top = super.centerX, prev.bottom + 30 | super.top
+		firstNews
+			"<b>Aug 29, 2014</b>: Layx alpha-0.1 released!"
+			centerX, top = super.centerX, prev.bottom + 30 | super.top
 
 
 about
